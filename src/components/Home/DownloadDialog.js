@@ -1,4 +1,5 @@
 import React from "react";
+import { API_BASE_URL } from "../../config";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
@@ -9,6 +10,7 @@ import {
   CircularProgress
 } from "@material-ui/core";
 import { CloudDownload, Close } from "@material-ui/icons";
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
   downloadContainer: {
@@ -49,10 +51,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function UploadDialog() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const [directory, setDirectory] = React.useState(null);
+  const [directory, setDirectory] = React.useState("");
   const [download, setDownload] = React.useState({
     downloaded: false,
-    loading: false
+    loading: false,
+    error: false
   });
 
   const handleClickOpen = () => {
@@ -63,7 +66,7 @@ export default function UploadDialog() {
     setOpen(false);
   };
 
-  const handleInputFile = e => {
+  const handleInputFolder = e => {
     setDownload({ ...download, loading: true });
 
     setTimeout(() => {
@@ -71,6 +74,14 @@ export default function UploadDialog() {
     }, 3000);
 
     setDirectory(e.target.files[0]);
+  };
+
+  const handleDownload = async () => {
+    try {
+      const res = await axios.get(`${API_BASE_URL}/download`);
+    } catch (err) {
+      setDownload({ ...download, error: true });
+    }
   };
 
   return (
@@ -107,11 +118,10 @@ export default function UploadDialog() {
             <input
               className={classes.hidden}
               id="contained-button-file"
+              directory={directory}
+              webkitdirectory=""
               type="file"
-              webkitdirectory
-              directory
-              multiple
-              onChange={handleInputFile}
+              onChange={handleInputFolder}
             />
             <label
               htmlFor="contained-button-file"

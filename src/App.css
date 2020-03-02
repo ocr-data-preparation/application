@@ -1,19 +1,35 @@
 .App {
   text-align: center;
+  
 }
-.App-header{
-  height: 30vh;
-  font-size: 5vh;
 
+.App-logo {
+  height: auto;
+  width: 15vw;
+  margin-top: 20vh;
+  margin-right: 3vw;
 }
-.navbar{
-  height: 20vh;
-  text-align: right;
-  margin-right: 10vw;
-  margin-top: 10vh;
-}
-.lowerPage{
+
+
+.App-header {
+  background-color: white;
+  min-height: 60vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.choose_button {
+  outline: 0 none;
+  border-radius: 20px;
+  background-color: lightgray;
+  width: 12vw;
+  height: 10vh;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 3vh;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

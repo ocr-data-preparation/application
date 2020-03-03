@@ -7,9 +7,10 @@ import {
   Slide,
   IconButton,
   Container,
-  CircularProgress
+  CircularProgress,
+  Fab
 } from "@material-ui/core";
-import { CloudDownload, Close, CheckCircle } from "@material-ui/icons";
+import { CloudDownload, Close, CheckCircle, GetApp } from "@material-ui/icons";
 import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
@@ -83,9 +84,9 @@ export default function UploadDialog() {
 
   return (
     <React.Fragment>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Download
-      </Button>
+      <Fab onClick={handleClickOpen}>
+        <GetApp />
+      </Fab>
       <Dialog
         fullScreen
         open={open}

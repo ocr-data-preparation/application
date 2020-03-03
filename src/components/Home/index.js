@@ -2,9 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Box, Grid } from "@material-ui/core";
 import Fab from "@material-ui/core/Fab";
-import Publish from "@material-ui/icons/Publish";
-import GetApp from "@material-ui/icons/GetApp";
 import history from "../History";
+
+import UploadDialog from "./UploadDialog";
+import DownloadDialog from "./DownloadDialogNoPath";
 
 export default function Home() {
   return (
@@ -13,17 +14,11 @@ export default function Home() {
         <h2>Choose your action</h2>
         <Grid container direction="row" justify="center" alignItems="center">
           <Box>
-            <Fab>
-              <Publish />
-            </Fab>
+            <UploadDialog />
             <div>Upload</div>
           </Box>
           <Box>
-            <Link to={"/warning"}>
-              <Fab onClick={() => history.push("/warning")}>
-                <GetApp />
-              </Fab>
-            </Link>
+            <DownloadDialog />
             <div>Download</div>
           </Box>
         </Grid>

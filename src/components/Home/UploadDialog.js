@@ -5,9 +5,10 @@ import {
   Dialog,
   Slide,
   IconButton,
-  Container
+  Container,
+  Fab
 } from "@material-ui/core";
-import { InsertPhoto, Close } from "@material-ui/icons";
+import { InsertPhoto, Close, Publish } from "@material-ui/icons";
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -59,9 +60,9 @@ export default function UploadDialog() {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open full-screen dialog
-      </Button>
+      <Fab onClick={handleClickOpen}>
+        <Publish />
+      </Fab>
       <Dialog
         fullScreen
         open={open}

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Grid, IconButton } from "@material-ui/core";
 import Fab from "@material-ui/core/Fab";
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
-import history from "../History";
 
 function TakingPhoto() {
   return (

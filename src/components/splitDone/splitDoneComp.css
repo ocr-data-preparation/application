@@ -1,0 +1,20 @@
+.App {
+    text-align: center;
+  }
+  .App-header{
+    height: 30vh;
+    font-size: 5vh;
+  
+  }
+  .navbar{
+    height: 20vh;
+    text-align: right;
+    margin-right: 10vw;
+    margin-top: 10vh;
+  }
+  .lowerPage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  

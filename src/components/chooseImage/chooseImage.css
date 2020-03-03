@@ -1,0 +1,39 @@
+.navbar{
+    height: 20vh;
+    text-align: right;
+    width: 100vw;
+  }
+.container{
+    text-align: center;
+    background-color: white;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+
+}
+.choose_button {
+    outline: 0 none;
+    border-radius: 20px;
+    background-color: lightgray;
+    width: 12vw;
+    height: 10vh;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 3vh;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+#image{
+    height: auto;
+    width: 15vw;
+}
+#icon{
+    height: auto;
+    width: 15vw;
+}
+.dropzone{
+    width: 30vw;
+    height: 30vh;
+}  

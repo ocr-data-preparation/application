@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
@@ -9,7 +9,38 @@ import {
   Fab
 } from "@material-ui/core";
 import { InsertPhoto, Close, Publish } from "@material-ui/icons";
+import {useDropzone} from 'react-dropzone';
 
+const thumbsContainer = {
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  marginTop: 16
+};
+
+const thumb = {
+  display: 'inline-flex',
+  borderRadius: 2,
+  border: '1px solid #eaeaea',
+  marginBottom: 8,
+  marginRight: 8,
+  width: "auto",
+  height: "50vh",
+  padding: 4,
+  boxSizing: 'border-box'
+};
+
+const thumbInner = {
+  display: 'flex',
+  minWidth: 0,
+  overflow: 'hidden'
+};
+
+const img = {
+  display: 'block',
+  width: 'auto',
+  height: '100%'
+};
 const useStyles = makeStyles(theme => ({
   appBar: {
     position: "relative"
@@ -22,7 +53,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: "10vw",
     textAlign: "center",
     width: "75vw",
-    marginBottom: "2vw"
+    marginBottom: "2vw",
   },
   insertPhotoIcons: {
     fontSize: "10vw"
@@ -49,13 +80,45 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function UploadDialog() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-
+  const [files, setFiles] = useState([]);
+    const {getRootProps, getInputProps} = useDropzone({
+      accept: 'image/*',
+      onDrop: acceptedFiles => {
+        var button = document.getElementById("bt1").style.display = "none";
+        button = document.getElementById("bt2").style.display="initial";
+        document.getElementById("icon").style.display = "none";
+        document.getElementById("dz2").style.display = "none";
+        document.getElementById("image").style.display = "initial";
+        setFiles(acceptedFiles.map(file => Object.assign(file, {
+          preview: URL.createObjectURL(file)
+          
+        })));
+      }
+    });
+    function onChange(e){
+      var button = document.getElementById("bt1").style.display = "none";
+      button = document.getElementById("bt2").style.display="initial";
+      document.getElementById("icon").style.display = "none";
+      document.getElementById("dz2").style.display = "none";
+      document.getElementById("image").style.display = "initial";
+    }
+    const thumbs = files.map(file => (
+      <div style={thumb} key={file.name}>
+        <div style={thumbInner}>
+          <img
+            src={file.preview}
+            style={img}
+          />
+        </div>
+      </div>
+    ));
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
+    document.getElementById("image").style.display = "none";
   };
 
   return (
@@ -79,11 +142,22 @@ export default function UploadDialog() {
           <Close className={classes.closeIcon} />
         </IconButton>
         <Container className={classes.uploadContainer}>
-          <InsertPhoto className={classes.insertPhotoIcons} />
-        </Container>
-        <Button variant="contained" className={classes.chooseImageButton}>
+        <div {...getRootProps({className: 'dropzone'} )}onChange={onChange}>
+          <input {...getInputProps()} />
+          <InsertPhoto id="icon" className={classes.insertPhotoIcons} />
+          <div style={thumbsContainer} id="image" style={{display:"none"}}>
+            {thumbs}
+          </div>
+        </div>
+        <div {...getRootProps({className: 'dropzone'}) }id = "dz2" onChange={onChange}>
+          <input {...getInputProps() } />
+          <Button id="bt1" variant="contained" className={classes.chooseImageButton}>
           Choose Image
-        </Button>
+          </Button>
+        </div>
+        <Button id ="bt2" variant="contained" className={classes.chooseImageButton} style={{display:"none"}}>Submit </Button>
+        </Container>
+        
       </Dialog>
     </div>
   );

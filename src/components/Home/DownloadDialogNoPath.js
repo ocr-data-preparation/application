@@ -12,6 +12,8 @@ import {
 } from "@material-ui/core";
 import { CloudDownload, Close, CheckCircle, GetApp } from "@material-ui/icons";
 import axios from "axios";
+import UploadedDialog from "./SuccessDialog";
+import SuccessDialog from "./SuccessDialog";
 
 const useStyles = makeStyles(theme => ({
   downloadContainer: {
@@ -52,7 +54,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function UploadDialog() {
+export default function DownloadDialog() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [download, setDownload] = React.useState({
@@ -74,7 +76,7 @@ export default function UploadDialog() {
       setDownload({ ...download, loading: true });
 
       setTimeout(async () => {
-        await axios.get(`${API_BASE_URL}/download`);
+        // await axios.get(`${API_BASE_URL}/download`);
         setDownload({ ...download, downloaded: true, loading: false });
       }, 3000);
     } catch (err) {
@@ -87,42 +89,46 @@ export default function UploadDialog() {
       <Fab onClick={handleClickOpen}>
         <GetApp />
       </Fab>
-      <Dialog
-        fullScreen
-        open={open}
-        onClose={handleClose}
-        TransitionComponent={Transition}
-      >
-        <IconButton
-          edge="start"
-          color="inherit"
-          onClick={handleClose}
-          aria-label="close"
-          className={classes.iconButton}
+      {download.downloaded ? (
+        <SuccessDialog message="Image saved" />
+      ) : (
+        <Dialog
+          fullScreen
+          open={open}
+          onClose={handleClose}
+          TransitionComponent={Transition}
         >
-          <Close className={classes.closeIcon} />
-        </IconButton>
-        {download.loading ? (
-          <CircularProgress className={classes.circularLoader} />
-        ) : (
-          <div class={classes.content}>
-            <Container className={classes.downloadContainer}>
-              {download.downloaded ? (
-                <CheckCircle className={classes.downloadPhotoIcons} />
-              ) : (
-                <CloudDownload className={classes.downloadPhotoIcons} />
-              )}
-            </Container>
-            <Button
-              className={classes.downloadButton}
-              variant="contained"
-              onClick={handleDownload}
-            >
-              Download
-            </Button>
-          </div>
-        )}
-      </Dialog>
+          <IconButton
+            edge="start"
+            color="inherit"
+            onClick={handleClose}
+            aria-label="close"
+            className={classes.iconButton}
+          >
+            <Close className={classes.closeIcon} />
+          </IconButton>
+          {download.loading ? (
+            <CircularProgress className={classes.circularLoader} />
+          ) : (
+            <div class={classes.content}>
+              <Container className={classes.downloadContainer}>
+                {download.downloaded ? (
+                  <CheckCircle className={classes.downloadPhotoIcons} />
+                ) : (
+                  <CloudDownload className={classes.downloadPhotoIcons} />
+                )}
+              </Container>
+              <Button
+                className={classes.downloadButton}
+                variant="contained"
+                onClick={handleDownload}
+              >
+                Download
+              </Button>
+            </div>
+          )}
+        </Dialog>
+      )}
     </React.Fragment>
   );
 }

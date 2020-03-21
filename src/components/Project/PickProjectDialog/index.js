@@ -34,7 +34,8 @@ export default function PickProjectDialog(props) {
 
   const projects = [
     { id: 1, title: "Project 1", pixel: 30 },
-    { id: 2, title: "Project 2", pixel: 50 }
+    { id: 2, title: "Project 2", pixel: 50 },
+    { id: 3, title: "Project 3", pixel: 30 }
   ];
 
   const handleClickOpen = () => {
@@ -73,7 +74,7 @@ export default function PickProjectDialog(props) {
         <Container className={classes.root}>
           {projects.map(project => (
             <ProjectCard
-              id={props.id}
+              id={project.id}
               title={project.title}
               pixel={project.pixel}
             />

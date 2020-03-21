@@ -6,8 +6,8 @@ import {
   Slide,
   IconButton,
   Container,
-  FormControl,
-  Input
+  TextField,
+  Typography
 } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
 
@@ -15,21 +15,9 @@ const useStyles = makeStyles(theme => ({
   root: {
     textAlign: "center"
   },
-  formControl: {
-    marginTop: "10vw"
-  },
   formItem: {
-    margin: "2vw",
-    padding: "0.5vw"
-  },
-  downloadContainer: {
-    marginTop: "10vw",
-    textAlign: "center",
-    width: "75vw",
-    marginBottom: "2vw"
-  },
-  downloadPhotoIcons: {
-    fontSize: "10vw"
+    marginTop: "2vw",
+    width: "30vw"
   },
   iconButton: {
     placeSelf: "flex-end",
@@ -38,18 +26,16 @@ const useStyles = makeStyles(theme => ({
   closeIcon: {
     fontSize: "2vw"
   },
-  downloadButton: {
-    width: "15vw",
-    placeSelf: "center",
-    textAlign: "center",
-    borderRadius: "10px",
-    padding: "1vw"
+  form: {
+    placeItems: "center",
+    display: "inline-grid"
   },
-  circularLoader: {
+  title: {
+    marginBottom: "5vw"
+  },
+  buttonRegister: {
+    marginTop: "5vw",
     placeSelf: "center"
-  },
-  hidden: {
-    display: "none"
   }
 }));
 
@@ -94,31 +80,23 @@ export default function RegisterProjectDialog(props) {
         >
           <Close className={classes.closeIcon} />
         </IconButton>
-        <Container className={classes.root}>
-          <FormControl className={classes.formControl}>
-            <Input
-              className={classes.formItem}
-              defaultValue="Project Name"
-              inputProps={{ "aria-label": "description" }}
-            />
-            <Input
-              className={classes.formItem}
-              placeholder="Placeholder"
-              inputProps={{ "aria-label": "description" }}
-            />
-            <Input
-              className={classes.formItem}
-              defaultValue="Disabled"
-              disabled
-              inputProps={{ "aria-label": "description" }}
-            />
-            <Input
-              className={classes.formItem}
-              defaultValue="Error"
-              error
-              inputProps={{ "aria-label": "description" }}
-            />
-          </FormControl>
+        <Container className={classes.form}>
+          <Typography variant="h2" className={classes.title}>
+            Register Project
+          </Typography>
+          <TextField
+            variant="outlined"
+            label="Project Name"
+            className={classes.formItem}
+          />
+          <TextField
+            variant="outlined"
+            label="Desired Pixel"
+            className={classes.formItem}
+          />
+          <Button variant="contained" className={classes.buttonRegister}>
+            <Typography variant="h6">Register</Typography>
+          </Button>
         </Container>
       </Dialog>
     </React.Fragment>

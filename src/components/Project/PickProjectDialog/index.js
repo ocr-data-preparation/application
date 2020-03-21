@@ -5,32 +5,15 @@ import {
   Dialog,
   Slide,
   IconButton,
-  Container,
-  FormControl,
-  Select,
-  MenuItem
+  Container
 } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
+import ProjectCard from "./ProjectCard";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    textAlign: "center"
-  },
-  formControl: {
-    marginTop: "10vw"
-  },
-  formItem: {
-    margin: "2vw",
-    padding: "0.5vw"
-  },
-  downloadContainer: {
-    marginTop: "10vw",
     textAlign: "center",
-    width: "75vw",
-    marginBottom: "2vw"
-  },
-  downloadPhotoIcons: {
-    fontSize: "10vw"
+    backgroundColor: "whitesmoke"
   },
   iconButton: {
     placeSelf: "flex-end",
@@ -38,19 +21,6 @@ const useStyles = makeStyles(theme => ({
   },
   closeIcon: {
     fontSize: "2vw"
-  },
-  downloadButton: {
-    width: "15vw",
-    placeSelf: "center",
-    textAlign: "center",
-    borderRadius: "10px",
-    padding: "1vw"
-  },
-  circularLoader: {
-    placeSelf: "center"
-  },
-  hidden: {
-    display: "none"
   }
 }));
 
@@ -62,11 +32,10 @@ export default function PickProjectDialog(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
-  const [age, setAge] = React.useState("");
-
-  const handleChange = event => {
-    setAge(event.target.value);
-  };
+  const projects = [
+    { id: 1, title: "Project 1", pixel: 30 },
+    { id: 2, title: "Project 2", pixel: 50 }
+  ];
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -102,19 +71,13 @@ export default function PickProjectDialog(props) {
           <Close className={classes.closeIcon} />
         </IconButton>
         <Container className={classes.root}>
-          <FormControl className={classes.formControl}>
-            <Select
-              className={classes.formItem}
-              value={age}
-              onChange={handleChange}
-              displayEmpty
-            >
-              <MenuItem>Project 1</MenuItem>
-              <MenuItem>Project 2</MenuItem>
-              <MenuItem>Project 3</MenuItem>
-              <MenuItem>Project 4</MenuItem>
-            </Select>
-          </FormControl>
+          {projects.map(project => (
+            <ProjectCard
+              id={props.id}
+              title={project.title}
+              pixel={project.pixel}
+            />
+          ))}
         </Container>
       </Dialog>
     </React.Fragment>

@@ -1,3 +1,3 @@
 module.exports = {
-  URL_BASE_API: "http://localhost:5000"
+  URL_BASE_API: "http://localhost:3001"
 };

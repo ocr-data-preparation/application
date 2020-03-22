@@ -18,10 +18,12 @@ const useStyles = makeStyles({
 
 export default function ProjectCard(props) {
   const classes = useStyles();
-  const handleOnClick = id => cookie.set("project-id", id);
+  const handleOnClick = id => {
+    cookie.set("project-id", id);
+  };
 
   return (
-    <Link to="/home" onClick={handleOnClick(props.id)}>
+    <Link to="/home" onClick={() => handleOnClick(props.id)}>
       <Card className={classes.root}>
         <CardContent>
           <Typography variant="h5" component="h2">

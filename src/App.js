@@ -4,6 +4,9 @@ import { Switch, Route } from "react-router-dom";
 import Warning from "./components/Warning";
 import Home from "./components/Home";
 import Help from "./components/Help";
+import Buttons from "./components/Split/Buttons";
+import Test from "./components/Split/Test";
+// import Split from "./components/Split";
 import FillingInPaper from "./components/Help/FillingInPaper";
 import TakingPhoto from "./components/Help/TakingPhoto";
 import SubmittingTutorial from "./components/Help/SubmittingTutorial";
@@ -15,6 +18,9 @@ function App() {
       <Route exact path="/" component={Home} />
       <Route path="/warning" component={Warning} />
       <Route exact path="/help" component={Help} />
+      {/* <Route exact path="/split" component={Split} /> */}
+      <Route exact path="/buttons" component={Buttons} />
+      <Route exact path="/test" component={Test} />
       <Route path="/help/paper" component={FillingInPaper} />
       <Route path="/help/take" component={TakingPhoto} />
       <Route path="/help/submit" component={SubmittingTutorial} />

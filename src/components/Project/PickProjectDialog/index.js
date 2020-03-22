@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
   Dialog,
   Slide,
   IconButton,
-  Container
+  Container,
+  CircularProgress
 } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
+
 import ProjectCard from "./ProjectCard";
+import { URL_BASE_API } from "../../../config";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -32,11 +36,11 @@ export default function PickProjectDialog(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
-  const projects = [
-    { id: 1, title: "Project 1", pixel: 30 },
-    { id: 2, title: "Project 2", pixel: 50 },
-    { id: 3, title: "Project 3", pixel: 30 }
-  ];
+  const [projects, setProjects] = useState({
+    data: [],
+    loading: true,
+    error: false
+  });
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -45,6 +49,26 @@ export default function PickProjectDialog(props) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const getProjectsData = async () =>
+    await axios.get(`${URL_BASE_API}/project`);
+
+  const fetchProjectData = async () => {
+    try {
+      setProjects({ ...projects, loading: true });
+      const response = await getProjectsData();
+      setTimeout(function() {
+        setProjects({ ...projects, data: response.data, loading: false });
+      }, 3000);
+    } catch (e) {
+      setProjects({ ...projects, error: true });
+    }
+  };
+
+  useEffect(() => {
+    fetchProjectData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <React.Fragment>
@@ -72,13 +96,17 @@ export default function PickProjectDialog(props) {
           <Close className={classes.closeIcon} />
         </IconButton>
         <Container className={classes.root}>
-          {projects.map(project => (
-            <ProjectCard
-              id={project.id}
-              title={project.title}
-              pixel={project.pixel}
-            />
-          ))}
+          {projects.loading ? (
+            <CircularProgress />
+          ) : (
+            projects.data.map(project => (
+              <ProjectCard
+                id={project.id}
+                title={project.title}
+                pixel={project.pixels}
+              />
+            ))
+          )}
         </Container>
       </Dialog>
     </React.Fragment>

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
@@ -7,9 +8,13 @@ import {
   IconButton,
   Container,
   TextField,
-  Typography
+  Typography,
+  CircularProgress,
+  Link
 } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
+
+import { URL_BASE_API } from "../../config";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -55,6 +60,38 @@ export default function RegisterProjectDialog(props) {
     setOpen(false);
   };
 
+  const [projects, setProjects] = useState({
+    data: {},
+    loading: false,
+    error: false
+  });
+
+  const postProjectsData = async project =>
+    await axios.post(`${URL_BASE_API}/project`, project);
+
+  const createProjectData = async () => {
+    try {
+      setProjects({ ...projects, loading: true });
+      console.log(projects.data);
+      await postProjectsData(projects.data);
+      setTimeout(function() {
+        setProjects({ ...projects, loading: false });
+      }, 3000);
+    } catch (e) {
+      setProjects({ ...projects, error: true });
+    }
+  };
+
+  const handleProjectNameChange = e => {
+    projects.data.project_name = e.target.value;
+    setProjects(projects);
+  };
+
+  const handlePixelsChange = e => {
+    projects.data.pixels = parseInt(e.target.value);
+    setProjects(projects);
+  };
+
   return (
     <React.Fragment>
       <Button
@@ -88,15 +125,29 @@ export default function RegisterProjectDialog(props) {
             variant="outlined"
             label="Project Name"
             className={classes.formItem}
+            value={projects.data && projects.data.project_name}
+            onChange={handleProjectNameChange}
           />
           <TextField
             variant="outlined"
             label="Desired Pixel"
             className={classes.formItem}
+            value={projects.data && projects.data.pixels}
+            onChange={handlePixelsChange}
           />
-          <Button variant="contained" className={classes.buttonRegister}>
-            <Typography variant="h6">Register</Typography>
-          </Button>
+          {projects.loading ? (
+            <CircularProgress />
+          ) : (
+            <Link to="/home">
+              <Button
+                variant="contained"
+                className={classes.buttonRegister}
+                onClick={createProjectData}
+              >
+                <Typography variant="h6">Register</Typography>
+              </Button>
+            </Link>
+          )}
         </Container>
       </Dialog>
     </React.Fragment>

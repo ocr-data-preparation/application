@@ -1,5 +1,5 @@
 import React from "react";
-import { API_BASE_URL } from "../../config";
+import { URL_BASE_API } from "../../config";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
@@ -78,7 +78,7 @@ export default function UploadDialog() {
 
   const handleDownload = async () => {
     try {
-      const res = await axios.get(`${API_BASE_URL}/download`);
+      const res = await axios.get(`${URL_BASE_API}/download`);
     } catch (err) {
       setDownload({ ...download, error: true });
     }

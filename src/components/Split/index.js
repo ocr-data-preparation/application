@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { Grid } from "@material-ui/core";
 import Fab from "@material-ui/core/Fab";
 import { makeStyles } from "@material-ui/core/styles";
-import {drawButtons} from "./ImageButton"
+import Buttons from "./Buttons"
 
 const useStyles = makeStyles(theme => ({
   container: {
-    marginTop: "10vw",
+    marginTop: "2vw",
     textAlign: "center",
     direction: "column",
     justifyContent: "center",
@@ -16,16 +16,19 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Split() {
-    const classes = useStyles();
-    return (
-    <Grid container className={classes.container}>
-        <Link to="/">
-        <Fab variant="extended">
-            Split
-        </Fab>
-        </Link>
-    </Grid>
-    );
+  const classes = useStyles();
+  return (
+    <div>
+      <Buttons/>
+      <Grid container className={classes.container}>
+          <Link to="/">
+            <Fab variant="extended">
+                Split
+            </Fab>
+          </Link>
+      </Grid>
+    </div>
+  );
 }
 
 export default Split;

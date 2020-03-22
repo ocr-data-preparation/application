@@ -41,7 +41,7 @@ function Buttons() {
 
     return(
         <div container className={classes.container}>
-            <img src={require('./paper_filled.jpg')} style={{width:'294px', height:'220px'}} alt='image'></img>
+            <img src={require('./paper_filled.jpg')} style={{width:'280px', height:'210px'}} alt='image'></img>
             <div container className={classes.buttonsContainer}>
                 <div>
                     <button onClick={changeState.bind(this,arr,0,0)} style={{ backgroundColor:'transparent', width:'20px', height:'20px'}}></button>

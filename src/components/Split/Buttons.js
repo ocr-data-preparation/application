@@ -42,16 +42,16 @@ function Buttons() {
             btnStyle = { 
                 backgroundColor:'yellow',
                 opacity:'0.3', 
-                width:'20px', 
-                height:'20px'
+                width:'40px', 
+                height:'40px'
             };
         }
         else  {
             btnStyle = { 
                 backgroundColor:'transparent', 
                 opacity:'0.3', 
-                width:'20px', 
-                height:'20px'
+                width:'40px', 
+                height:'40px'
             };
         }
 
@@ -76,19 +76,13 @@ function Buttons() {
     }
 
     function passState(arr) {
-        //dummy
-        if (arr.test[0][0]) {
-            console.log("waw");
-        }
-        else {
-            console.log("nope");
-        }
+        console.log(JSON.stringify(arr));
     }
 
     return(
         <div container className={classes.container}>
             <div container className={classes.imageContainer}>
-                <img src={require('./paper_filled.jpg')} style={{width:'280px', height:'210px'}} alt='image'></img>
+                <img src={require('./paper_filled.jpg')} style={{width:'560px', height:'410px'}} alt='image'></img>
                 <div container className={classes.buttonsContainer}>
                     <div>
                         <button id={1} onClick={changeState.bind(this,1,arr,0,0)} 

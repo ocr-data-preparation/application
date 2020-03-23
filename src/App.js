@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 
+import Project from "./components/Project";
 import Warning from "./components/Warning";
 import Home from "./components/Home";
 import Help from "./components/Help";
@@ -12,7 +13,8 @@ import DownloadingTutorial from "./components/Help/DownloadingTutorial";
 function App() {
   return (
     <Switch>
-      <Route exact path="/" component={Home} />
+      <Route exact path="/" component={Project} />
+      <Route path="/home" component={Home} />
       <Route path="/warning" component={Warning} />
       <Route exact path="/help" component={Help} />
       <Route path="/help/paper" component={FillingInPaper} />

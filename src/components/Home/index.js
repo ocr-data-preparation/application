@@ -1,9 +1,9 @@
-import React from 'react';
-import {Box, Grid} from '@material-ui/core';
+import React from "react";
+import { Box, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Fab from '@material-ui/core/Fab';
-import Publish from '@material-ui/icons/Publish';
-import GetApp from '@material-ui/icons/GetApp';
+import Fab from "@material-ui/core/Fab";
+import Publish from "@material-ui/icons/Publish";
+import GetApp from "@material-ui/icons/GetApp";
 import { Link } from "react-router-dom";
 
 import UploadDialog from "./UploadDialog";
@@ -37,12 +37,10 @@ const useStyles = makeStyles(theme => ({
 
 function Home() {
   const classes = useStyles();
-  return (    
-    <div> 
+  return (
+    <div>
       <Grid container className={classes.container}>
-        <h2 className={classes.header}>
-          Choose your action
-        </h2>
+        <h2 className={classes.header}>Choose your action</h2>
         <Grid container className={classes.miniContainer}>
           <Box className={classes.buttonContainer}>
             <UploadDialog />
@@ -54,10 +52,8 @@ function Home() {
           </Box>
         </Grid>
         <Link to="/help">
-          <Fab variant="extended">
-              Need help? Click here
-          </Fab>
-        </Link>        
+          <Fab variant="extended">Need help? Click here</Fab>
+        </Link>
       </Grid>
     </div>
   );

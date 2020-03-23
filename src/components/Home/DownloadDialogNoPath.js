@@ -1,5 +1,5 @@
 import React from "react";
-import { API_BASE_URL } from "../../config";
+import { URL_BASE_API } from "../../config";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
@@ -76,7 +76,7 @@ export default function DownloadDialog() {
       setDownload({ ...download, loading: true });
 
       setTimeout(async () => {
-        // await axios.get(`${API_BASE_URL}/download`);
+        // await axios.get(`${URL_BASE_API}/download`);
         setDownload({ ...download, downloaded: true, loading: false });
       }, 3000);
     } catch (err) {

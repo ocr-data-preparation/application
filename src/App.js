@@ -12,6 +12,7 @@ import FillingInPaper from "./components/Help/FillingInPaper";
 import TakingPhoto from "./components/Help/TakingPhoto";
 import SubmittingTutorial from "./components/Help/SubmittingTutorial";
 import DownloadingTutorial from "./components/Help/DownloadingTutorial";
+import SplitDone from "./components/splitDone/splitDoneComp";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       {/* <Route exact path="/split" component={Split} /> */}
       <Route exact path="/buttons" component={Buttons} />
       <Route exact path="/test" component={Test} />
+      <Route path="/split/done" component={SplitDone} />
       <Route path="/help/paper" component={FillingInPaper} />
       <Route path="/help/take" component={TakingPhoto} />
       <Route path="/help/submit" component={SubmittingTutorial} />

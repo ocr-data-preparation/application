@@ -149,8 +149,6 @@ export default function UploadDialog() {
   const handleSubmit = async () => {
     const result = await getInitialExcludesArray(files[0]);
 
-    console.log(result);
-
     setData({
       ...data,
       submit: true,

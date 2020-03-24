@@ -91,6 +91,18 @@ function Buttons(props) {
     console.log(JSON.stringify(arr));
   }
 
+  const handleSplit = async () => {
+    console.log(props.path);
+
+    await axios.post(`${URL_BASE_API}/image/save`, {
+      path: props.path,
+      pixels: 50,
+      includes: arr
+    });
+
+    window.location.replace(`http://localhost:3000/split/done`);
+  };
+
   return (
     <div container className={classes.container}>
       <div container className={classes.imageContainer}>
@@ -823,11 +835,9 @@ function Buttons(props) {
         </div>
       </div>
 
-      <Link>
-        <Fab variant="extended" onClick={passState.bind(this, arr)}>
-          SPLIT
-        </Fab>
-      </Link>
+      <Fab variant="extended" onClick={handleSplit}>
+        SPLIT
+      </Fab>
     </div>
   );
 }

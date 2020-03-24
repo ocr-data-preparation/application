@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Fab from "@material-ui/core/Fab";
 import Test from "./test2.json"
 import { makeStyles } from "@material-ui/core/styles";
+import { URL_BASE_API } from "../../config";
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -76,6 +78,13 @@ function Buttons() {
     }
 
     function passState(arr) {
+        // var request = new XMLHttpRequest();
+        // request.open('POST', '${URL_BASE_API}/datatest', true);
+        // request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+        // request.send(JSON.stringify(arr));
+        const postProjectsData = async project =>
+            await axios.post(`${URL_BASE_API}/project`, project);
+        
         console.log(JSON.stringify(arr));
     }
 

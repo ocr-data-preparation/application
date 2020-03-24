@@ -34,8 +34,7 @@ function Buttons(props) {
   console.log(URL_BASE_API + "/" + props.squared_path);
   const classes = useStyles();
 
-  const testStr = JSON.stringify(Test);
-  var arr = JSON.parse(testStr);
+  var arr = props.excludes;
 
   var btnStyle;
 
@@ -66,7 +65,7 @@ function Buttons(props) {
   }
 
   function changeState(id, arr, idX, idY) {
-    arr.test[idX][idY] = !arr.test[idX][idY];
+    arr[idX][idY] = !arr[idX][idY];
 
     if (getState(arr, idX, idY)) {
       document.getElementById(id).style.backgroundColor = "yellow";
@@ -74,11 +73,11 @@ function Buttons(props) {
       document.getElementById(id).style.backgroundColor = "transparent";
     }
 
-    console.log(arr.test[idX][idY]);
+    console.log(arr[idX][idY]);
   }
 
   function getState(arr, idX, idY) {
-    return arr.test[idX][idY];
+    return arr[idX][idY];
   }
 
   function passState(arr) {

@@ -39,6 +39,12 @@ function Buttons() {
 
     var btnStyle;
 
+    const [projects, setProjects] = useState({
+        arr: {},
+        srcImage: "",
+        pixel: 0
+    });
+
     function styleButton(arr, idX, idY) {
         if (getState(arr, idX, idY)) {
             btnStyle = { 

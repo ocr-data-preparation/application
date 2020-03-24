@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
@@ -10,6 +11,9 @@ import {
 } from "@material-ui/core";
 import { InsertPhoto, Close, Publish } from "@material-ui/icons";
 import { useDropzone } from "react-dropzone";
+
+import Buttons from "../Split/Buttons";
+import { URL_BASE_API } from "../../config";
 
 const thumbsContainer = {
   display: "flex",
@@ -79,6 +83,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function UploadDialog() {
   const classes = useStyles();
+  const [data, setData] = useState({ submit: false });
   const [open, setOpen] = React.useState(false);
   const [files, setFiles] = useState([]);
   const { getRootProps, getInputProps } = useDropzone({
@@ -121,6 +126,33 @@ export default function UploadDialog() {
     document.getElementById("image").style.display = "none";
   };
 
+  const getInitialExcludesArray = async image => {
+    console.log(image);
+    const formData = new FormData();
+    formData.append("image", image);
+
+    const res = await axios({
+      method: "post",
+      url: `${URL_BASE_API}/image/submit`,
+      data: formData,
+      headers: { "Content-Type": "multipart/form-data" }
+    });
+
+    return res.data;
+  };
+
+  const handleSubmit = async () => {
+    const result = await getInitialExcludesArray(files[0].preview);
+    console.log(result);
+    setData({
+      ...data,
+      submit: true,
+      excludes: result.excludes,
+      path: result.path,
+      squared_path: result.squared_path
+    });
+  };
+
   return (
     <div>
       <Fab onClick={handleClickOpen}>
@@ -141,37 +173,53 @@ export default function UploadDialog() {
         >
           <Close className={classes.closeIcon} />
         </IconButton>
-        <Container className={classes.uploadContainer}>
-          <div {...getRootProps({ className: "dropzone" })} onChange={onChange}>
-            <input {...getInputProps()} />
-            <InsertPhoto id="icon" className={classes.insertPhotoIcons} />
-            <div style={thumbsContainer} id="image" style={{ display: "none" }}>
-              {thumbs}
+        {data.submit ? (
+          <Buttons
+            image={data.squared_path}
+            path={data.path}
+            excludes={data.excludes}
+          />
+        ) : (
+          <Container className={classes.uploadContainer}>
+            <div
+              {...getRootProps({ className: "dropzone" })}
+              onChange={onChange}
+            >
+              <input {...getInputProps()} />
+              <InsertPhoto id="icon" className={classes.insertPhotoIcons} />
+              <div
+                style={thumbsContainer}
+                id="image"
+                style={{ display: "none" }}
+              >
+                {thumbs}
+              </div>
             </div>
-          </div>
-          <div
-            {...getRootProps({ className: "dropzone" })}
-            id="dz2"
-            onChange={onChange}
-          >
-            <input {...getInputProps()} />
+            <div
+              {...getRootProps({ className: "dropzone" })}
+              id="dz2"
+              onChange={onChange}
+            >
+              <input {...getInputProps()} />
+              <Button
+                id="bt1"
+                variant="contained"
+                className={classes.chooseImageButton}
+              >
+                Choose Image
+              </Button>
+            </div>
             <Button
-              id="bt1"
+              id="bt2"
               variant="contained"
               className={classes.chooseImageButton}
+              style={{ display: "none" }}
+              onClick={handleSubmit}
             >
-              Choose Image
+              Submit{" "}
             </Button>
-          </div>
-          <Button
-            id="bt2"
-            variant="contained"
-            className={classes.chooseImageButton}
-            style={{ display: "none" }}
-          >
-            Submit{" "}
-          </Button>
-        </Container>
+          </Container>
+        )}
       </Dialog>
     </div>
   );

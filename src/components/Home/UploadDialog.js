@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import fs from "fs";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
@@ -83,7 +84,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function UploadDialog() {
   const classes = useStyles();
-  const [data, setData] = useState({ submit: false });
+  const [data, setData] = useState({
+    submit: false,
+    excludes: null,
+    path: null,
+    squared_path: null
+  });
   const [open, setOpen] = React.useState(false);
   const [files, setFiles] = useState([]);
   const { getRootProps, getInputProps } = useDropzone({
@@ -127,8 +133,7 @@ export default function UploadDialog() {
   };
 
   const getInitialExcludesArray = async image => {
-    console.log(image);
-    const formData = new FormData();
+    let formData = new FormData();
     formData.append("image", image);
 
     const res = await axios({
@@ -142,14 +147,16 @@ export default function UploadDialog() {
   };
 
   const handleSubmit = async () => {
-    const result = await getInitialExcludesArray(files[0].preview);
+    const result = await getInitialExcludesArray(files[0]);
+
     console.log(result);
+
     setData({
       ...data,
       submit: true,
       excludes: result.excludes,
       path: result.path,
-      squared_path: result.squared_path
+      squared_path: result.squared_image_path
     });
   };
 
@@ -175,7 +182,7 @@ export default function UploadDialog() {
         </IconButton>
         {data.submit ? (
           <Buttons
-            image={data.squared_path}
+            squared_path={data.squared_path}
             path={data.path}
             excludes={data.excludes}
           />
@@ -185,7 +192,7 @@ export default function UploadDialog() {
               {...getRootProps({ className: "dropzone" })}
               onChange={onChange}
             >
-              <input {...getInputProps()} />
+              <input {...getInputProps()} type="file" />
               <InsertPhoto id="icon" className={classes.insertPhotoIcons} />
               <div
                 style={thumbsContainer}
@@ -200,7 +207,7 @@ export default function UploadDialog() {
               id="dz2"
               onChange={onChange}
             >
-              <input {...getInputProps()} />
+              <input {...getInputProps()} type="file" />
               <Button
                 id="bt1"
                 variant="contained"

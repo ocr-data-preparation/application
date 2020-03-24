@@ -31,6 +31,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Buttons(props) {
+  console.log(URL_BASE_API + "/" + props.squared_path);
   const classes = useStyles();
 
   const testStr = JSON.stringify(Test);
@@ -95,7 +96,7 @@ function Buttons(props) {
     <div container className={classes.container}>
       <div container className={classes.imageContainer}>
         <img
-          src={props.image}
+          src={URL_BASE_API + "/" + props.squared_path}
           style={{ width: "560px", height: "410px" }}
           alt="image"
         ></img>

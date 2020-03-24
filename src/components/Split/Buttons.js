@@ -88,17 +88,11 @@ function Buttons(props) {
     return parseInt(res.data.pixels);
   };
 
-  function passState(arr) {
-    // var request = new XMLHttpRequest();
-    // request.open('POST', '${URL_BASE_API}/datatest', true);
-    // request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-    // request.send(JSON.stringify(arr));
-  }
-
   const handleSplit = async () => {
+    let pixel = await getPixel(cookie.get("project-id"));
     await axios.post(`${URL_BASE_API}/image/save`, {
       path: props.path,
-      pixels: await getPixel(cookie.get("project-id")),
+      pixels: pixel,
       includes: arr
     });
 

@@ -85,7 +85,7 @@ function Buttons(props) {
 
   const getPixel = async id => {
     let res = await axios.get(URL_BASE_API + "/project/" + id);
-    return res.data.pixels;
+    return parseInt(res.data.pixels);
   };
 
   function passState(arr) {
@@ -96,11 +96,9 @@ function Buttons(props) {
   }
 
   const handleSplit = async () => {
-    console.log(props.path);
-
     await axios.post(`${URL_BASE_API}/image/save`, {
       path: props.path,
-      pixels: 50,
+      pixels: await getPixel(cookie.get("project-id")),
       includes: arr
     });
 

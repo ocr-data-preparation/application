@@ -1,6 +1,10 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Paper, Fab } from "@material-ui/core";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -14,6 +18,11 @@ const useStyles = makeStyles(theme => ({
       textAlign: 'center',
       color: theme.palette.text.secondary,
     },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 200,
+        textAlign: 'left'
+    },
     container: {
         marginTop: "1vw",
         textAlign: "center",
@@ -23,7 +32,7 @@ const useStyles = makeStyles(theme => ({
     },
     imageContainer: {
         position: "relative",
-        marginTop: "10vw",
+        marginTop: "3vw",
         textAlign: "center",
         direction: "column",
         justifyContent: "center",
@@ -40,13 +49,23 @@ const useStyles = makeStyles(theme => ({
 function TestNewUI() {
     const classes = useStyles();
     var btnStyle;
+    const [tipePotongan, setTipePotongan] = React.useState('');
+    const [tipeWarna, setTipeWarna] = React.useState('');
+
+    const handleChangeTipePotongan = event => {
+        setTipePotongan(event.target.value);
+    };
+
+    const handleChangeTipeWarna = event => {
+        setTipeWarna(event.target.value);
+    };
 
     function styleButton() {
         btnStyle = {
             backgroundColor: "yellow",
             opacity: "0.3",
             width: "30px",
-            height: "31px"
+            height: "31px",
         };
         return btnStyle;
       }
@@ -644,7 +663,32 @@ function TestNewUI() {
                     </div>
                 </Grid>
                 <Grid item xs={3}>
-                    <Paper className={classes.paper}>xs=3</Paper>
+                    <Paper className={classes.paper}>
+                        <FormControl className={classes.formControl}>
+                            <InputLabel id="potongan">Tipe Potongan</InputLabel>
+                            <Select
+                                labelId="potongan"
+                                id="tipe-potongan"
+                                value={tipePotongan}
+                                onChange={handleChangeTipePotongan}
+                                >
+                                <MenuItem value={"kotak"}>Kotak</MenuItem>
+                                <MenuItem value={"angka"}>Angka</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <FormControl className={classes.formControl}>
+                            <InputLabel id="warna">Tipe Warna</InputLabel>
+                            <Select
+                                labelId="warna"
+                                id="tipe-warna"
+                                value={tipeWarna}
+                                onChange={handleChangeTipeWarna}
+                                >
+                                <MenuItem value={"kotak"}>Color</MenuItem>
+                                <MenuItem value={"angka"}>Black and White</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Paper>
                 </Grid>
             </Grid>
             <Fab variant="extended">

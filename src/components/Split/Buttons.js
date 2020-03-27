@@ -6,7 +6,7 @@ import { Grid, Paper, InputLabel, MenuItem,
         Radio, IconButton, RadioGroup, 
         FormControlLabel, FormControl, 
         FormLabel, Select, ButtonGroup,
-        FormHelperText
+        FormHelperText, Button
         } from "@material-ui/core";
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
@@ -59,10 +59,10 @@ const useStyles = makeStyles(theme => ({
 function Buttons(props) {
     console.log(URL_BASE_API + "/" + props.squared_path);
     const classes = useStyles();
-    const [tipePotongan, setTipePotongan] = React.useState('');
-    const [tipeWarna, setTipeWarna] = React.useState('');
+    const [tipePotongan, setTipePotongan] = React.useState('angka');
+    const [tipeWarna, setTipeWarna] = React.useState('color');
     const [ketebalan, setKetebalan] = React.useState(0);
-    const [noise, setNoise] = React.useState('');
+    const [noise, setNoise] = React.useState('none');
 
     var arr = props.excludes;
 
@@ -136,12 +136,12 @@ function Buttons(props) {
         console.log(tipeWarna);
     };
 
-    const handleIncrementTebal = event => {
+    const handleIncrementTebal = () => {
         setKetebalan(ketebalan + 1);
         console.log(ketebalan);
     };
 
-    const handleDecrementTebal = event => {
+    const handleDecrementTebal = () => {
         setKetebalan(ketebalan - 1);
         console.log(ketebalan);
     };
@@ -904,29 +904,31 @@ function Buttons(props) {
                                 <MenuItem value={"bw"}>Black and White</MenuItem>
                         </Select>
                     </FormControl>
-                        <FormControl className={classes.formControl}>
-                            <FormLabel id="noise">Handle Noise</FormLabel>
-                            <RadioGroup onChange={handleNoise}>
+                    <FormControl className={classes.formControl}>
+                        <FormLabel id="noise">Handle Noise</FormLabel>
+                        <RadioGroup onChange={handleNoise}>
                                 <FormControlLabel value="none" control={<Radio color="primary" />} label="None" />
                                 <FormControlLabel value="auto" control={<Radio color="primary" />} label="Auto" />
                                 <FormControlLabel value="manual" control={<Radio color="primary" />} label="Manual" />
-                            </RadioGroup>
-                        </FormControl>
-                        <FormControl className={classes.formControl}>
-                            <FormLabel id="tebal">Ketebalan</FormLabel>
-                            <ButtonGroup>
-                                <FormControlLabel
-                                        control={<IconButton color="primary" onClick={handleIncrementTebal}><AddCircleIcon/></IconButton>}
-                                        />
-                                <FormHelperText>{ketebalan}</FormHelperText>
-                                <FormControlLabel
-                                        control={<IconButton color="primary" onClick={handleDecrementTebal}><RemoveCircleIcon/></IconButton>}
-                                        />
-                            </ButtonGroup>
-                        </FormControl>
-                        <Fab variant="extended">
-                            Apply
-                        </Fab>
+                        </RadioGroup>
+                    </FormControl>
+                    <FormControl className={classes.formControl}>
+                        <FormLabel id="tebal">Ketebalan</FormLabel>
+                        <ButtonGroup>
+                        <FormControlLabel
+                                control={<IconButton color="primary" onClick={handleIncrementTebal}><AddCircleIcon/></IconButton>}
+                                />
+                        <FormControlLabel
+                                control={<Button disabled>{ketebalan}</Button>}
+                                />
+                        <FormControlLabel
+                                control={<IconButton color="primary" onClick={handleDecrementTebal}><RemoveCircleIcon/></IconButton>}
+                                />
+                        </ButtonGroup>
+                    </FormControl>
+                    <Fab variant="extended">
+                        Apply
+                    </Fab>
                 </Paper>
             </Grid>
         </Grid>

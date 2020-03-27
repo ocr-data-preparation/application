@@ -36,11 +36,12 @@ const useStyles = makeStyles(theme => ({
     display: "inline-grid"
   },
   title: {
-    marginBottom: "5vw"
+    fontSize: "3vw"
   },
   buttonRegister: {
     marginTop: "5vw",
-    placeSelf: "center"
+    placeSelf: "center",
+    marginBottom: "5vh"
   }
 }));
 
@@ -103,7 +104,6 @@ export default function RegisterProjectDialog(props) {
         Register Project
       </Button>
       <Dialog
-        fullScreen
         open={open}
         onClose={handleClose}
         TransitionComponent={Transition}
@@ -118,9 +118,7 @@ export default function RegisterProjectDialog(props) {
           <Close className={classes.closeIcon} />
         </IconButton>
         <Container className={classes.form}>
-          <Typography variant="h2" className={classes.title}>
-            Register Project
-          </Typography>
+          <h2 className={classes.title}>Project</h2>
           <TextField
             variant="outlined"
             label="Project Name"

@@ -25,6 +25,9 @@ const useStyles = makeStyles(theme => ({
   },
   closeIcon: {
     fontSize: "2vw"
+  },
+  loading: {
+    margin: "2vw"
   }
 }));
 
@@ -81,7 +84,6 @@ export default function PickProjectDialog(props) {
         Pick Project
       </Button>
       <Dialog
-        fullScreen
         open={open}
         onClose={handleClose}
         TransitionComponent={Transition}
@@ -97,7 +99,7 @@ export default function PickProjectDialog(props) {
         </IconButton>
         <Container className={classes.root}>
           {projects.loading ? (
-            <CircularProgress />
+            <CircularProgress className={classes.loading} />
           ) : (
             projects.data.map(project => (
               <ProjectCard

@@ -12,7 +12,13 @@ const cookie = new Cookie();
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
-    marginBottom: "1vw"
+    marginBottom: "1vw",
+    backgroundColor: "#FF5A5F",
+    width: "23vw",
+    marginLeft: "3.5vw",
+    marginRight: "3.5vw",
+    marginTop: "2vw",
+    color: "white"
   }
 });
 

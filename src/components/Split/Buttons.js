@@ -5,7 +5,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Paper, InputLabel, MenuItem, 
         Radio, IconButton, RadioGroup, 
         FormControlLabel, FormControl, 
-        FormLabel, Select, ButtonGroup 
+        FormLabel, Select, ButtonGroup,
+        FormHelperText
         } from "@material-ui/core";
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
@@ -60,6 +61,8 @@ function Buttons(props) {
     const classes = useStyles();
     const [tipePotongan, setTipePotongan] = React.useState('');
     const [tipeWarna, setTipeWarna] = React.useState('');
+    const [ketebalan, setKetebalan] = React.useState(0);
+    const [noise, setNoise] = React.useState('');
 
     var arr = props.excludes;
 
@@ -120,10 +123,27 @@ function Buttons(props) {
 
     const handleChangeTipePotongan = event => {
         setTipePotongan(event.target.value);
+        console.log(tipePotongan);
+    };
+
+    const handleNoise = event => {
+        setNoise(event.target.value);
+        console.log(noise);
     };
 
     const handleChangeTipeWarna = event => {
         setTipeWarna(event.target.value);
+        console.log(tipeWarna);
+    };
+
+    const handleIncrementTebal = event => {
+        setKetebalan(ketebalan + 1);
+        console.log(ketebalan);
+    };
+
+    const handleDecrementTebal = event => {
+        setKetebalan(ketebalan - 1);
+        console.log(ketebalan);
     };
 
     return (
@@ -880,13 +900,13 @@ function Buttons(props) {
                                 value={tipeWarna}
                                 onChange={handleChangeTipeWarna}
                                 >
-                                <MenuItem value={"kotak"}>Color</MenuItem>
-                                <MenuItem value={"angka"}>Black and White</MenuItem>
+                                <MenuItem value={"color"}>Color</MenuItem>
+                                <MenuItem value={"bw"}>Black and White</MenuItem>
                         </Select>
                     </FormControl>
                         <FormControl className={classes.formControl}>
                             <FormLabel id="noise">Handle Noise</FormLabel>
-                            <RadioGroup>
+                            <RadioGroup onChange={handleNoise}>
                                 <FormControlLabel value="none" control={<Radio color="primary" />} label="None" />
                                 <FormControlLabel value="auto" control={<Radio color="primary" />} label="Auto" />
                                 <FormControlLabel value="manual" control={<Radio color="primary" />} label="Manual" />
@@ -895,8 +915,13 @@ function Buttons(props) {
                         <FormControl className={classes.formControl}>
                             <FormLabel id="tebal">Ketebalan</FormLabel>
                             <ButtonGroup>
-                                <FormControlLabel value="increase" control={<IconButton variant="contained" color="primary"><AddCircleIcon/></IconButton>} />
-                                <FormControlLabel value="decrease" control={<IconButton variant="contained" color="primary"><RemoveCircleIcon/></IconButton>} />
+                                <FormControlLabel
+                                        control={<IconButton color="primary" onClick={handleIncrementTebal}><AddCircleIcon/></IconButton>}
+                                        />
+                                <FormHelperText>{ketebalan}</FormHelperText>
+                                <FormControlLabel
+                                        control={<IconButton color="primary" onClick={handleDecrementTebal}><RemoveCircleIcon/></IconButton>}
+                                        />
                             </ButtonGroup>
                         </FormControl>
                         <Fab variant="extended">

@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Fab from "@material-ui/core/Fab";
-import Test from "./test2.json";
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Paper } from "@material-ui/core";
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import { Grid, Paper, InputLabel, MenuItem, 
+        Radio, IconButton, RadioGroup, 
+        FormControlLabel, FormControl, 
+        FormLabel, Select, ButtonGroup 
+        } from "@material-ui/core";
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import { URL_BASE_API } from "../../config";
 import axios from "axios";
 import Cookie from "universal-cookie";
@@ -70,7 +71,7 @@ function Buttons(props) {
                 backgroundColor: "yellow",
                 opacity: "0.3",
                 width: "30px",
-                height: "31px"
+                height: "30px"
             };
         } 
         else {
@@ -78,7 +79,7 @@ function Buttons(props) {
                 backgroundColor: "transparent",
                 opacity: "0.3",
                 width: "30px",
-                height: "31px"
+                height: "30px"
             };
         }
 
@@ -92,9 +93,9 @@ function Buttons(props) {
             document.getElementById(id).style.backgroundColor = "yellow";
         } else {
             document.getElementById(id).style.backgroundColor = "transparent";
-    }
+        }
 
-    console.log(arr[idX][idY]);
+        console.log(arr[idX][idY]);
     }
 
     function getState(arr, idX, idY) {
@@ -893,11 +894,10 @@ function Buttons(props) {
                         </FormControl>
                         <FormControl className={classes.formControl}>
                             <FormLabel id="tebal">Ketebalan</FormLabel>
-                            <RadioGroup>
-                                <FormControlLabel value="none" control={<Radio color="primary" />} label="None" />
-                                <FormControlLabel value="increase" control={<Radio color="primary" />} label="Increase" />
-                                <FormControlLabel value="decrease" control={<Radio color="primary" />} label="Decrease" />
-                            </RadioGroup>
+                            <ButtonGroup>
+                                <FormControlLabel value="increase" control={<IconButton variant="contained" color="primary"><AddCircleIcon/></IconButton>} />
+                                <FormControlLabel value="decrease" control={<IconButton variant="contained" color="primary"><RemoveCircleIcon/></IconButton>} />
+                            </ButtonGroup>
                         </FormControl>
                         <Fab variant="extended">
                             Apply

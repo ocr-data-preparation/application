@@ -883,6 +883,25 @@ function Buttons(props) {
                                 <MenuItem value={"angka"}>Black and White</MenuItem>
                         </Select>
                     </FormControl>
+                        <FormControl className={classes.formControl}>
+                            <FormLabel id="noise">Handle Noise</FormLabel>
+                            <RadioGroup>
+                                <FormControlLabel value="none" control={<Radio color="primary" />} label="None" />
+                                <FormControlLabel value="auto" control={<Radio color="primary" />} label="Auto" />
+                                <FormControlLabel value="manual" control={<Radio color="primary" />} label="Manual" />
+                            </RadioGroup>
+                        </FormControl>
+                        <FormControl className={classes.formControl}>
+                            <FormLabel id="tebal">Ketebalan</FormLabel>
+                            <RadioGroup>
+                                <FormControlLabel value="none" control={<Radio color="primary" />} label="None" />
+                                <FormControlLabel value="increase" control={<Radio color="primary" />} label="Increase" />
+                                <FormControlLabel value="decrease" control={<Radio color="primary" />} label="Decrease" />
+                            </RadioGroup>
+                        </FormControl>
+                        <Fab variant="extended">
+                            Apply
+                        </Fab>
                 </Paper>
             </Grid>
         </Grid>

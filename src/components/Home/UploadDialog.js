@@ -75,6 +75,15 @@ const useStyles = makeStyles(theme => ({
     placeSelf: "center",
     borderRadius: "10px",
     padding: "1vw"
+  },
+  title: {
+    color: "white",
+    backgroundColor: "#FF5A5F",
+    height: "15vw",
+    width: "15vw"
+  },
+  titleIcon: {
+    fontSize: "10vw"
   }
 }));
 
@@ -160,9 +169,14 @@ export default function UploadDialog() {
 
   return (
     <div>
-      <Fab onClick={handleClickOpen}>
-        <Publish />
-      </Fab>
+      <Button
+        variant="outlined"
+        color="primary"
+        onClick={handleClickOpen}
+        className={classes.title}
+      >
+        <Publish className={classes.titleIcon} />
+      </Button>
       <Dialog
         fullScreen
         open={open}

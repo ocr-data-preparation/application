@@ -6,7 +6,7 @@ import { Grid, Paper, InputLabel, MenuItem,
         Radio, IconButton, RadioGroup, 
         FormControlLabel, FormControl, 
         FormLabel, Select, ButtonGroup,
-        FormHelperText, Button
+        FormHelperText, Button, TextField
         } from "@material-ui/core";
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
@@ -144,6 +144,19 @@ function Buttons(props) {
     const handleDecrementTebal = () => {
         setKetebalan(ketebalan - 1);
         console.log(ketebalan);
+    };
+
+    const handleOption = async () => {
+        let pixel = await getPixel(cookie.get("project-id"));
+        await axios.post(`${URL_BASE_API}/image/save`, {
+            path: props.path,
+            pixels: pixel,
+            includes: arr,
+            varTipePotongBackend: tipePotongan,
+            varTipeWarnaBackend: tipeWarna,
+            varKetebalanBackend: ketebalan,
+            varNoiseBackend: noise,
+        });
     };
 
     return (
@@ -905,28 +918,27 @@ function Buttons(props) {
                         </Select>
                     </FormControl>
                     <FormControl className={classes.formControl}>
-                        <FormLabel id="noise">Handle Noise</FormLabel>
-                        <RadioGroup onChange={handleNoise}>
-                                <FormControlLabel value="none" control={<Radio color="primary" />} label="None" />
-                                <FormControlLabel value="auto" control={<Radio color="primary" />} label="Auto" />
-                                <FormControlLabel value="manual" control={<Radio color="primary" />} label="Manual" />
-                        </RadioGroup>
+                        <InputLabel id="noise">Handle Noise</InputLabel>
+                        <Select
+                                labelId="noise"
+                                id="noiseID"
+                                value={noise}
+                                onChange={handleNoise}
+                                >
+                                <MenuItem value={"none"}>None</MenuItem>
+                                <MenuItem value={"auto"}>Auto</MenuItem>
+                                <MenuItem value={"manual"}>Manual</MenuItem>
+                        </Select>
                     </FormControl>
                     <FormControl className={classes.formControl}>
                         <FormLabel id="tebal">Ketebalan</FormLabel>
                         <ButtonGroup>
-                        <FormControlLabel
-                                control={<IconButton color="primary" onClick={handleIncrementTebal}><AddCircleIcon/></IconButton>}
-                                />
-                        <FormControlLabel
-                                control={<Button disabled>{ketebalan}</Button>}
-                                />
-                        <FormControlLabel
-                                control={<IconButton color="primary" onClick={handleDecrementTebal}><RemoveCircleIcon/></IconButton>}
-                                />
+                                <FormControlLabel control={<IconButton color="primary" onClick={handleDecrementTebal}><RemoveCircleIcon/></IconButton>} />
+                                <FormControlLabel control={<Button disabled>{ketebalan}</Button>} />
+                                <FormControlLabel control={<IconButton color="primary" onClick={handleIncrementTebal}><AddCircleIcon/></IconButton>}/>
                         </ButtonGroup>
                     </FormControl>
-                    <Fab variant="extended">
+                    <Fab variant="extended" onClick={handleOption}>
                         Apply
                     </Fab>
                 </Paper>

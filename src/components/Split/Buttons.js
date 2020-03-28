@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Fab from "@material-ui/core/Fab";
-import Test from "./test2.json";
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Paper } from "@material-ui/core";
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import { Grid, Paper, InputLabel, MenuItem, 
+        Radio, IconButton, RadioGroup, 
+        FormControlLabel, FormControl, 
+        FormLabel, Select, ButtonGroup,
+        FormHelperText, Button, TextField
+        } from "@material-ui/core";
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import { URL_BASE_API } from "../../config";
 import axios from "axios";
 import Cookie from "universal-cookie";
@@ -57,8 +59,10 @@ const useStyles = makeStyles(theme => ({
 function Buttons(props) {
     console.log(URL_BASE_API + "/" + props.squared_path);
     const classes = useStyles();
-    const [tipePotongan, setTipePotongan] = React.useState('');
-    const [tipeWarna, setTipeWarna] = React.useState('');
+    const [tipePotongan, setTipePotongan] = React.useState('angka');
+    const [tipeWarna, setTipeWarna] = React.useState('color');
+    const [ketebalan, setKetebalan] = React.useState(0);
+    const [noise, setNoise] = React.useState('none');
 
     var arr = props.excludes;
 
@@ -70,7 +74,7 @@ function Buttons(props) {
                 backgroundColor: "yellow",
                 opacity: "0.3",
                 width: "30px",
-                height: "31px"
+                height: "30px"
             };
         } 
         else {
@@ -78,7 +82,7 @@ function Buttons(props) {
                 backgroundColor: "transparent",
                 opacity: "0.3",
                 width: "30px",
-                height: "31px"
+                height: "30px"
             };
         }
 
@@ -92,9 +96,9 @@ function Buttons(props) {
             document.getElementById(id).style.backgroundColor = "yellow";
         } else {
             document.getElementById(id).style.backgroundColor = "transparent";
-    }
+        }
 
-    console.log(arr[idX][idY]);
+        console.log(arr[idX][idY]);
     }
 
     function getState(arr, idX, idY) {
@@ -119,10 +123,40 @@ function Buttons(props) {
 
     const handleChangeTipePotongan = event => {
         setTipePotongan(event.target.value);
+        console.log(tipePotongan);
+    };
+
+    const handleNoise = event => {
+        setNoise(event.target.value);
+        console.log(noise);
     };
 
     const handleChangeTipeWarna = event => {
         setTipeWarna(event.target.value);
+        console.log(tipeWarna);
+    };
+
+    const handleIncrementTebal = () => {
+        setKetebalan(ketebalan + 1);
+        console.log(ketebalan);
+    };
+
+    const handleDecrementTebal = () => {
+        setKetebalan(ketebalan - 1);
+        console.log(ketebalan);
+    };
+
+    const handleOption = async () => {
+        let pixel = await getPixel(cookie.get("project-id"));
+        await axios.post(`${URL_BASE_API}/image/save`, {
+            path: props.path,
+            pixels: pixel,
+            includes: arr,
+            varTipePotongBackend: tipePotongan,
+            varTipeWarnaBackend: tipeWarna,
+            varKetebalanBackend: ketebalan,
+            varNoiseBackend: noise,
+        });
     };
 
     return (
@@ -879,10 +913,34 @@ function Buttons(props) {
                                 value={tipeWarna}
                                 onChange={handleChangeTipeWarna}
                                 >
-                                <MenuItem value={"kotak"}>Color</MenuItem>
-                                <MenuItem value={"angka"}>Black and White</MenuItem>
+                                <MenuItem value={"color"}>Color</MenuItem>
+                                <MenuItem value={"bw"}>Black and White</MenuItem>
                         </Select>
                     </FormControl>
+                    <FormControl className={classes.formControl}>
+                        <InputLabel id="noise">Handle Noise</InputLabel>
+                        <Select
+                                labelId="noise"
+                                id="noiseID"
+                                value={noise}
+                                onChange={handleNoise}
+                                >
+                                <MenuItem value={"none"}>None</MenuItem>
+                                <MenuItem value={"auto"}>Auto</MenuItem>
+                                <MenuItem value={"manual"}>Manual</MenuItem>
+                        </Select>
+                    </FormControl>
+                    <FormControl className={classes.formControl}>
+                        <FormLabel id="tebal">Ketebalan</FormLabel>
+                        <ButtonGroup>
+                                <FormControlLabel control={<IconButton color="primary" onClick={handleDecrementTebal}><RemoveCircleIcon/></IconButton>} />
+                                <FormControlLabel control={<Button disabled>{ketebalan}</Button>} />
+                                <FormControlLabel control={<IconButton color="primary" onClick={handleIncrementTebal}><AddCircleIcon/></IconButton>}/>
+                        </ButtonGroup>
+                    </FormControl>
+                    <Fab variant="extended" onClick={handleOption}>
+                        Apply
+                    </Fab>
                 </Paper>
             </Grid>
         </Grid>

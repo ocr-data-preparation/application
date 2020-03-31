@@ -11,7 +11,6 @@ import TestNewUI from "./components/Split/TestNewUI";
 import FillingInPaper from "./components/Help/FillingInPaper";
 import TakingPhoto from "./components/Help/TakingPhoto";
 import SubmittingTutorial from "./components/Help/SubmittingTutorial";
-import DownloadingTutorial from "./components/Help/DownloadingTutorial";
 import SplitDone from "./components/splitDone/splitDoneComp";
 
 function App() {
@@ -28,7 +27,6 @@ function App() {
       <Route path="/help/paper" component={FillingInPaper} />
       <Route path="/help/take" component={TakingPhoto} />
       <Route path="/help/submit" component={SubmittingTutorial} />
-      <Route path="/help/download" component={DownloadingTutorial} />
     </Switch>
   );
 }

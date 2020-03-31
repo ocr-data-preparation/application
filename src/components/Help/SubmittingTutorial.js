@@ -1,22 +1,22 @@
 import React from "react";
 import { Grid, IconButton } from "@material-ui/core";
-import Fab from "@material-ui/core/Fab";
-import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
-import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+
+
+const useStyles = makeStyles(theme => ({
+}));
 
 function SubmittingTutorial() {
+  const classes = useStyles();
   return (
     <div>
-      <div alignItems="right">
-        <Link to="/help">
-          <IconButton aria-label="close">
-            <CloseRoundedIcon />
-          </IconButton>
-        </Link>
-      </div>
-      <Grid container direction="column" justify="center" alignItems="center">
-        <div>1</div>
-        <div>Pencet tombol upload</div>
+      <h2>
+        SUBMITTING
+      </h2>
+      <Grid container>
+        <Grid item xs={12}>
+          Lalala
+        </Grid>
       </Grid>
     </div>
   );

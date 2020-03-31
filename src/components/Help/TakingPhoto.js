@@ -1,22 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Grid, IconButton } from "@material-ui/core";
-import Fab from "@material-ui/core/Fab";
-import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
+import { makeStyles } from "@material-ui/core/styles";
+
+
+const useStyles = makeStyles(theme => ({
+}));
 
 function TakingPhoto() {
+  const classes = useStyles();
   return (
     <div>
-      <div alignItems="right">
-        <Link to="/help">
-          <IconButton aria-label="close">
-            <CloseRoundedIcon />
-          </IconButton>
-        </Link>
-      </div>
-      <Grid container direction="column" justify="center" alignItems="center">
-        <div>1</div>
-        <Fab variant="extended">Download Paper Template</Fab>
+      <h2>
+        TAKING PHOTO
+      </h2>
+      <Grid container>
+        <Grid item xs={12}>
+          Lalala
+        </Grid>
       </Grid>
     </div>
   );

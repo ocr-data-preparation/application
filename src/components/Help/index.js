@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     },
     display: {
       width: '70%',
-      padding: "2vw"
+      padding: "3vw"
     }
 }));
 

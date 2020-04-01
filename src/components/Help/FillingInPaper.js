@@ -10,7 +10,6 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: "#FF5A5F"
   },
   root: {
-    marginTop: "1vw"
   },
   listDisplay: {
     textAlign: 'left'

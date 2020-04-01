@@ -13,7 +13,8 @@ const useStyles = makeStyles(theme => ({
         textAlign: "center",
         direction: "column",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        padding: "2vw"
     },
     root: {
       backgroundColor:"#6E87FF"
@@ -21,10 +22,11 @@ const useStyles = makeStyles(theme => ({
     title: {
       textAlign: "center",
       color: 'white',
-      fontSize: '50px'
+      fontSize: '3vw'
     },
     display: {
-      width: '70%'
+      width: '70%',
+      padding: "2vw"
     }
 }));
 

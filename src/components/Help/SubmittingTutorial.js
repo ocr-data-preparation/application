@@ -1,8 +1,6 @@
 import React from "react";
 import { Grid, Paper, IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { URL_BASE_API } from "../../config";
-import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
   contentDispay: {

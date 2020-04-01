@@ -21,8 +21,10 @@ const useStyles = makeStyles(theme => ({
     },
     title: {
       textAlign: "center",
-      color: 'white',
-      fontSize: '3vw'
+      justifyContent: "center",
+      backgroundColor: 'white',
+      color: '#6E87FF',
+      fontSize: '2vw'
     },
     display: {
       width: '70%',
@@ -39,9 +41,11 @@ function Help() {
               <ArrowBackRoundedIcon />
             </IconButton>
           </Link>
-          <h1 className={classes.title}>
-            TUTORIAL
-          </h1>
+          <Grid container className={classes.title}>
+            <h1>
+              TUTORIAL
+            </h1>
+          </Grid>
           <Grid container className={classes.container}>
             <Paper className={classes.display}>
               <Grid>

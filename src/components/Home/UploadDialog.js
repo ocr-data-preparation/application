@@ -14,6 +14,7 @@ import { InsertPhoto, Close, Publish } from "@material-ui/icons";
 import { useDropzone } from "react-dropzone";
 
 import Buttons from "../Split/Buttons";
+import ModifiedButton from "../UI/Button";
 import { URL_BASE_API } from "../../config";
 
 const thumbsContainer = {
@@ -30,7 +31,7 @@ const thumb = {
   marginBottom: 8,
   marginRight: 8,
   width: "auto",
-  height: "50vh",
+  height: "auto",
   padding: 4,
   boxSizing: "border-box"
 };
@@ -43,8 +44,8 @@ const thumbInner = {
 
 const img = {
   display: "block",
-  width: "auto",
-  height: "100%"
+  width: "25vw",
+  height: "auto"
 };
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -55,13 +56,14 @@ const useStyles = makeStyles(theme => ({
     flex: 1
   },
   uploadContainer: {
-    marginTop: "10vw",
     textAlign: "center",
-    width: "75vw",
+    width: "auto",
     marginBottom: "2vw"
   },
   insertPhotoIcons: {
-    fontSize: "10vw"
+    marginTop: "2vw",
+    marginBottom: "3vw",
+    fontSize: "20vw"
   },
   iconButton: {
     placeSelf: "flex-end",
@@ -71,7 +73,7 @@ const useStyles = makeStyles(theme => ({
     fontSize: "2vw"
   },
   chooseImageButton: {
-    width: "15vw",
+    width: "auto",
     placeSelf: "center",
     borderRadius: "10px",
     padding: "1vw"
@@ -178,7 +180,6 @@ export default function UploadDialog() {
         <Publish className={classes.titleIcon} />
       </Button>
       <Dialog
-        fullScreen
         open={open}
         onClose={handleClose}
         TransitionComponent={Transition}
@@ -200,6 +201,7 @@ export default function UploadDialog() {
           />
         ) : (
           <Container className={classes.uploadContainer}>
+            <h2>Insert Image</h2>
             <div
               {...getRootProps({ className: "dropzone" })}
               onChange={onChange}
@@ -220,23 +222,14 @@ export default function UploadDialog() {
               onChange={onChange}
             >
               <input {...getInputProps()} type="file" />
-              <Button
-                id="bt1"
-                variant="contained"
-                className={classes.chooseImageButton}
-              >
-                Choose Image
-              </Button>
+              <ModifiedButton id="bt1" buttonTag="Choose Image" />
             </div>
-            <Button
+            <ModifiedButton
               id="bt2"
-              variant="contained"
-              className={classes.chooseImageButton}
               style={{ display: "none" }}
-              onClick={handleSubmit}
-            >
-              Submit{" "}
-            </Button>
+              OnClick={handleSubmit}
+              buttonTag="Submit"
+            />
           </Container>
         )}
       </Dialog>

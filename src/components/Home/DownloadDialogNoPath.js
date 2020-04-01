@@ -6,11 +6,12 @@ import {
   Slide,
   IconButton,
   Container,
-  CircularProgress,
-  Fab
+  CircularProgress
 } from "@material-ui/core";
 import { CloudDownload, Close, CheckCircle, GetApp } from "@material-ui/icons";
 import SuccessDialog from "./SuccessDialog";
+
+import NotAvailable from "../UI/NotAvailable";
 
 const useStyles = makeStyles(theme => ({
   downloadContainer: {
@@ -93,7 +94,6 @@ export default function DownloadDialog() {
   return (
     <React.Fragment>
       <Button
-        disabled
         variant="outlined"
         color="primary"
         onClick={handleClickOpen}
@@ -105,7 +105,6 @@ export default function DownloadDialog() {
         <SuccessDialog message="Image saved" />
       ) : (
         <Dialog
-          fullScreen
           open={open}
           onClose={handleClose}
           TransitionComponent={Transition}
@@ -119,7 +118,8 @@ export default function DownloadDialog() {
           >
             <Close className={classes.closeIcon} />
           </IconButton>
-          {download.loading ? (
+          <NotAvailable />
+          {/* {download.loading ? (
             <CircularProgress className={classes.circularLoader} />
           ) : (
             <div class={classes.content}>
@@ -138,7 +138,7 @@ export default function DownloadDialog() {
                 Download
               </Button>
             </div>
-          )}
+          )} */}
         </Dialog>
       )}
     </React.Fragment>

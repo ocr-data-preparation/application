@@ -8,7 +8,7 @@ import {
   Slide,
   IconButton,
   Container,
-  Fab
+  CircularProgress
 } from "@material-ui/core";
 import { InsertPhoto, Close, Publish } from "@material-ui/icons";
 import { useDropzone } from "react-dropzone";
@@ -99,7 +99,8 @@ export default function UploadDialog() {
     submit: false,
     excludes: null,
     path: null,
-    squared_path: null
+    squared_path: null,
+    loading: false
   });
   const [open, setOpen] = React.useState(false);
   const [files, setFiles] = useState([]);
@@ -158,6 +159,7 @@ export default function UploadDialog() {
   };
 
   const handleSubmit = async () => {
+    setData({ ...data, loading: true });
     const result = await getInitialExcludesArray(files[0]);
 
     setData({
@@ -165,7 +167,8 @@ export default function UploadDialog() {
       submit: true,
       excludes: result.excludes,
       path: result.path,
-      squared_path: result.squared_image_path
+      squared_path: result.squared_image_path,
+      loading: false
     });
   };
 
@@ -224,12 +227,16 @@ export default function UploadDialog() {
               <input {...getInputProps()} type="file" />
               <ModifiedButton id="bt1" buttonTag="Choose Image" />
             </div>
-            <ModifiedButton
-              id="bt2"
-              style={{ display: "none" }}
-              OnClick={handleSubmit}
-              buttonTag="Submit"
-            />
+            {data.loading ? (
+              <CircularProgress />
+            ) : (
+              <ModifiedButton
+                id="bt2"
+                style={{ display: "none" }}
+                OnClick={handleSubmit}
+                buttonTag="Submit"
+              />
+            )}
           </Container>
         )}
       </Dialog>

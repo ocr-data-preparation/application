@@ -1,5 +1,4 @@
 import React from "react";
-import Fab from "@material-ui/core/Fab";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Paper } from "@material-ui/core";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -10,50 +9,40 @@ import { URL_BASE_API } from "../../config";
 import axios from "axios";
 import Cookie from "universal-cookie";
 
+import Button from "../UI/Button";
+
 const cookie = new Cookie();
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
-    justifyContent: "center",
-    textAlign: "center",
-    alignItems: "center"
+    textAlign: "center"
   },
   paper: {
+    marginTop: "2vw",
     padding: theme.spacing(2),
     textAlign: "center",
-    color: theme.palette.text.secondary
+    maxWidth: "none",
+    color: theme.palette.text.secondary,
+    width: "20vw"
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 200,
-    textAlign: "left"
+    minWidth: 200
   },
   container: {
-    marginTop: "1vw",
     textAlign: "center",
-    direction: "column",
-    justifyContent: "center",
-    alignItems: "center"
+    placeContent: "center"
   },
   imageContainer: {
-    position: "relative",
-    marginTop: "10vw",
-    textAlign: "center",
-    direction: "column",
-    justifyContent: "center",
-    alignItems: "center"
+    textAlign: "center"
   },
   buttonsContainer: {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: `translate(${-50}%, ${-50}%)`
+    textAlign: "center"
   }
 }));
 
 function Buttons(props) {
-  console.log(URL_BASE_API + "/" + props.squared_path);
+  console.log('url("' + URL_BASE_API + "/" + props.squared_path + '")');
   const classes = useStyles();
   const [tipePotongan, setTipePotongan] = React.useState("");
   const [tipeWarna, setTipeWarna] = React.useState("");
@@ -126,12 +115,18 @@ function Buttons(props) {
     <div className={classes.root}>
       <Grid container className={classes.container}>
         <Grid item xs={9} className={classes.imageContainer}>
-          <img
-            src={URL_BASE_API + "/" + props.squared_path}
-            style={{ width: "420px", height: "310px" }}
-            alt="image"
-          ></img>
-          <div container className={classes.buttonsContainer}>
+          <h2>Select Image Grid to Split</h2>
+          <div
+            container
+            className={classes.buttonsContainer}
+            style={{
+              width: "420px",
+              height: "310px",
+              backgroundSize: "420px 310px",
+              backgroundImage:
+                'url("' + URL_BASE_API + "/" + props.squared_path + '")'
+            }}
+          >
             <div>
               <button
                 id={1}
@@ -854,38 +849,40 @@ function Buttons(props) {
             </div>
           </div>
         </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="potongan">Tipe Potongan</InputLabel>
-              <Select
-                labelId="potongan"
-                id="tipe-potongan"
-                value={tipePotongan}
-                onChange={handleChangeTipePotongan}
-              >
-                <MenuItem value={"kotak"}>Kotak</MenuItem>
-                <MenuItem value={"angka"}>Angka</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="warna">Tipe Warna</InputLabel>
-              <Select
-                labelId="warna"
-                id="tipe-warna"
-                value={tipeWarna}
-                onChange={handleChangeTipeWarna}
-              >
-                <MenuItem value={"kotak"}>Color</MenuItem>
-                <MenuItem value={"angka"}>Black and White</MenuItem>
-              </Select>
-            </FormControl>
-          </Paper>
-        </Grid>
       </Grid>
-      <Fab variant="extended" onClick={handleSplit}>
-        SPLIT
-      </Fab>
+      <Grid item xs={3}>
+        <Paper className={classes.paper}>
+          <FormControl className={classes.formControl}>
+            <InputLabel id="potongan" variant="outlined">
+              Tipe Potongan
+            </InputLabel>
+            <Select
+              labelId="potongan"
+              id="tipe-potongan"
+              value={tipePotongan}
+              onChange={handleChangeTipePotongan}
+            >
+              <MenuItem value={"kotak"}>Kotak</MenuItem>
+              <MenuItem value={"angka"}>Angka</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl className={classes.formControl}>
+            <InputLabel id="warna" variant="outlined">
+              Tipe Warna
+            </InputLabel>
+            <Select
+              labelId="warna"
+              id="tipe-warna"
+              value={tipeWarna}
+              onChange={handleChangeTipeWarna}
+            >
+              <MenuItem value={"kotak"}>Color</MenuItem>
+              <MenuItem value={"angka"}>Black and White</MenuItem>
+            </Select>
+          </FormControl>
+        </Paper>
+      </Grid>
+      <Button buttonTag="SPLIT" OnClick={handleSplit} />
     </div>
   );
 }

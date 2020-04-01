@@ -20,13 +20,11 @@ const useStyles = makeStyles(theme => ({
 
 function SubmittingTutorial() {
   const classes = useStyles();
-
-  const minRes = "8MP";
   
   return (
     <div className={classes.root}>
       <h2>
-        TAKING PHOTO
+        SUBMITTING
       </h2>
       
       <Grid container spacing={3}>
@@ -34,16 +32,10 @@ function SubmittingTutorial() {
         <Grid item xs={6}>
           <Paper className={classes.contentDispay}>
             <h3>
-              Check Your Camera's Resolution
+              Saving
             </h3>
             <p>
-              Make sure your camera's resolution will not make the final cropped image broken
-            </p>
-            <p>
-              The minimum resolution of your camera is {minRes}
-            </p>
-            <p>
-              Scanning the images are preferable
+              Save your image on local computer
             </p>
           </Paper>
         </Grid>
@@ -55,20 +47,44 @@ function SubmittingTutorial() {
         <Grid item xs={6}>
           <Paper className={classes.contentDispay}>
             <h3>
-              Check Image Orientation
+              Upload
             </h3>
             <p>
-              The image must be taken horizontally
+              Click on the "Upload" button on the home page
             </p>
             <p>
-              Row containing number '0's must be on the top
+              Choose the image you want to crop, or drag and drop the image on to the page
             </p>
             <p>
-              Row containing number '9's must be on the bottom
+              Click "Submit" Button
             </p>
           </Paper>
         </Grid>
         <Grid item xs={2}> </Grid>
+      </Grid>
+
+      <Grid container spacing={3}>
+        <Grid item xs={2}>  </Grid>
+        <Grid item xs={6}>
+          <Paper className={classes.contentDispay}>
+            <h3>
+              Choosing Image Parts
+            </h3>
+            <p>
+              The image should have been cropped, yet not saved yet
+            </p>
+            <p>
+              How the system cropped the image shoud be shown
+            </p>
+            <p>
+              Choose the parts you want to exclude by clicking on the chosen parts
+            </p>
+            <p>
+              Click "Submit" button when all excluded parts have been chosen
+            </p>
+          </Paper>
+        </Grid>
+        <Grid item xs> </Grid>
       </Grid>
     </div>
   );

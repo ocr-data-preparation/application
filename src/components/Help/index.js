@@ -9,35 +9,39 @@ import TakingPhoto from "./TakingPhoto";
 
 const useStyles = makeStyles(theme => ({
     container: {
-        marginTop: "1vw",
+        marginTop: "3vw",
         textAlign: "center",
         direction: "column",
         justifyContent: "center",
         alignItems: "center"
     },
+    root: {
+      backgroundColor:"#6E87FF"
+    },
+    title: {
+      textAlign: "center",
+      color: 'white',
+      fontSize: '50px'
+    },
     display: {
       width: '70%'
-    },
-    header: {
-        marginTop: "-30px",
-        padding: "50px"
     }
 }));
 
 function Help() {
     const classes = useStyles();
     return (
-        <div>
+        <div className={classes.root}>
           <Link to="/home">
             <IconButton aria-label="close">
               <ArrowBackRoundedIcon />
             </IconButton>
           </Link>
+          <h1 className={classes.title}>
+            TUTORIAL
+          </h1>
           <Grid container className={classes.container}>
             <Paper className={classes.display}>
-              <h1>
-                TUTORIAL
-              </h1>
               <Grid>
                 <FillingInPaper/>
               </Grid>

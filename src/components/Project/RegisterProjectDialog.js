@@ -84,10 +84,11 @@ export default function RegisterProjectDialog(props) {
   const createProjectData = async () => {
     try {
       setProjects({ ...projects, loading: true });
-      await postProjectsData(projects.data);
+      const res = await postProjectsData(projects.data);
 
       setTimeout(function() {
         setProjects({ ...projects, loading: false });
+        cookie.set("project-id", res.data.id);
         window.location.replace(`http://localhost:3000/home`);
       }, 3000);
     } catch (e) {

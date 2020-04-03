@@ -57,7 +57,7 @@ export default function PickProjectDialog(props) {
   };
 
   const getProjectsData = async () =>
-    await axios.get(`${URL_BASE_API}/project`);
+    await axios.get(`${URL_BASE_API}/project/`);
 
   const fetchProjectData = async () => {
     try {

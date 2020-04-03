@@ -86,6 +86,9 @@ const useStyles = makeStyles(theme => ({
   },
   titleIcon: {
     fontSize: "10vw"
+  },
+  loading: {
+    margin: "2vw"
   }
 }));
 
@@ -141,7 +144,7 @@ export default function UploadDialog() {
 
   const handleClose = () => {
     setOpen(false);
-    document.getElementById("image").style.display = "none";
+    // document.getElementById("image").style.display = "none";
   };
 
   const getInitialExcludesArray = async image => {
@@ -228,7 +231,7 @@ export default function UploadDialog() {
               <ModifiedButton id="bt1" buttonTag="Choose Image" />
             </div>
             {data.loading ? (
-              <CircularProgress />
+              <CircularProgress className={classes.loading} />
             ) : (
               <ModifiedButton
                 id="bt2"

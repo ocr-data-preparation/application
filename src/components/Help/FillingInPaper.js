@@ -1,50 +1,86 @@
 import React from "react";
-import { Grid, IconButton } from "@material-ui/core";
+import { Grid, Paper, IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Fab from "@material-ui/core/Fab";
-import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
-import template_guide from "../../assets/img/template_guide.jpg";
-import paper_filled from "../../assets/img/paper_filled.jpg";
-import { Link } from "react-router-dom";
 
 
 const useStyles = makeStyles(theme => ({
-  container: {
-      marginTop: "10vw",
-      textAlign: "center",
-      direction: "column",
-      justifyContent: "center",
-      alignItems: "center"
+  contentDispay: {
+    padding: '1vw',
+    color: 'white',
+    backgroundColor: "#FF5A5F"
   },
-  header: {
-      marginTop: "-30px",
-      padding: "50px"
+  root: {
   },
-  iconButton: {
-    placeSelf: "right"
+  listDisplay: {
+    textAlign: 'left'
   }
 }));
 
 function FillingInPaper() {
   const classes = useStyles();
+
+  const srcTemplate = "template/blablabla";
+
   return (
-    <div>
-      <Grid container justifyContent="right">
-        <Link to="/help">
-          <IconButton className={classes.iconButton} aria-label="close">
-            <CloseRoundedIcon />
-          </IconButton>
-        </Link>
+    <div className={classes.root}>
+      <h2>
+        FILLING THE PAPER
+      </h2>
+      
+      <Grid container spacing={3}>
+        <Grid item xs={2}>  </Grid>
+        <Grid item xs={6}>
+          <Paper className={classes.contentDispay}>
+            <h3>
+              Download and Print the Template Picture
+            </h3>
+            <p>
+              You can found the template on {srcTemplate}
+            </p>
+          </Paper>
+        </Grid>
+        <Grid item xs> </Grid>
       </Grid>
-      <Grid container direction="column" justify="center" alignItems="center">
-        <div>1</div>
-        <Fab variant="extended">Download Paper Template</Fab>
+
+      <Grid container spacing={3}>
+        <Grid item xs> </Grid>
+        <Grid item xs={6}>
+          <Paper className={classes.contentDispay}>
+            <h3>
+              Fill in the Template
+            </h3>
+            <p>
+              Write numbers from 0 to 9 in the box on the template
+            </p>
+          </Paper>
+        </Grid>
+        <Grid item xs={2}> </Grid>
       </Grid>
-      <Grid container direction="column" justify="center" alignItems="center">
-        <div>2</div>
-        <div>Fill in the paper</div>
-        <img src={template_guide} width="410.75" height="250"></img>
-        <img src={paper_filled} width="353.78" height="250"></img>
+      
+      <Grid container spacing={3}>
+        <Grid item xs={2}>  </Grid>
+        <Grid item xs={6}>
+          <Paper className={classes.contentDispay}>
+            <h3>
+              Fill It Accordingly
+            </h3>
+            <ul className={classes.listDisplay}>
+              <li>
+                Write number '0' on the first row 
+              </li>
+              <li>
+                Write number '1' on the second row 
+              </li>
+              <li>
+                Write number '2' on the third row 
+              </li>
+              <li>
+                And so on!
+              </li>
+            </ul>
+          </Paper>
+        </Grid>
+        <Grid item xs> </Grid>
       </Grid>
     </div>
   );

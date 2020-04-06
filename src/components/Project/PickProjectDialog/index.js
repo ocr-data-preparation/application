@@ -17,7 +17,7 @@ import { URL_BASE_API } from "../../../config";
 const useStyles = makeStyles(theme => ({
   root: {
     textAlign: "center",
-    backgroundColor: "whitesmoke"
+    marginBottom: "3vw"
   },
   iconButton: {
     placeSelf: "flex-end",
@@ -25,6 +25,12 @@ const useStyles = makeStyles(theme => ({
   },
   closeIcon: {
     fontSize: "2vw"
+  },
+  loading: {
+    margin: "2vw"
+  },
+  title: {
+    fontSize: "3vw"
   }
 }));
 
@@ -51,7 +57,7 @@ export default function PickProjectDialog(props) {
   };
 
   const getProjectsData = async () =>
-    await axios.get(`${URL_BASE_API}/project`);
+    await axios.get(`${URL_BASE_API}/project/`);
 
   const fetchProjectData = async () => {
     try {
@@ -81,7 +87,6 @@ export default function PickProjectDialog(props) {
         Pick Project
       </Button>
       <Dialog
-        fullScreen
         open={open}
         onClose={handleClose}
         TransitionComponent={Transition}
@@ -96,13 +101,14 @@ export default function PickProjectDialog(props) {
           <Close className={classes.closeIcon} />
         </IconButton>
         <Container className={classes.root}>
+          <h2 className={classes.title}>Project</h2>
           {projects.loading ? (
-            <CircularProgress />
+            <CircularProgress className={classes.loading} />
           ) : (
             projects.data.map(project => (
               <ProjectCard
                 id={project.id}
-                title={project.title}
+                title={project.project_name}
                 pixel={project.pixels}
               />
             ))

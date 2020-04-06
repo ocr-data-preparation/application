@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Cookie from "universal-cookie";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
@@ -9,8 +10,7 @@ import {
   Container,
   TextField,
   Typography,
-  CircularProgress,
-  Link
+  CircularProgress
 } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
 
@@ -36,17 +36,25 @@ const useStyles = makeStyles(theme => ({
     display: "inline-grid"
   },
   title: {
-    marginBottom: "5vw"
+    fontSize: "3vw"
   },
   buttonRegister: {
     marginTop: "5vw",
-    placeSelf: "center"
+    placeSelf: "center",
+    marginBottom: "5vh",
+    color: "white",
+    backgroundColor: "#FF5A5F"
+  },
+  loading: {
+    margin: "2vw"
   }
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+
+const cookie = new Cookie();
 
 export default function RegisterProjectDialog(props) {
   const classes = useStyles();
@@ -67,15 +75,21 @@ export default function RegisterProjectDialog(props) {
   });
 
   const postProjectsData = async project =>
-    await axios.post(`${URL_BASE_API}/project`, project);
+    await axios({
+      method: "POST",
+      url: `${URL_BASE_API}/project/`,
+      data: { project_name: project.project_name, pixels: project.pixels }
+    });
 
   const createProjectData = async () => {
     try {
       setProjects({ ...projects, loading: true });
-      console.log(projects.data);
-      await postProjectsData(projects.data);
+      const res = await postProjectsData(projects.data);
+
       setTimeout(function() {
         setProjects({ ...projects, loading: false });
+        cookie.set("project-id", res.data.id);
+        window.location.replace(`http://localhost:3000/home`);
       }, 3000);
     } catch (e) {
       setProjects({ ...projects, error: true });
@@ -103,7 +117,6 @@ export default function RegisterProjectDialog(props) {
         Register Project
       </Button>
       <Dialog
-        fullScreen
         open={open}
         onClose={handleClose}
         TransitionComponent={Transition}
@@ -118,9 +131,7 @@ export default function RegisterProjectDialog(props) {
           <Close className={classes.closeIcon} />
         </IconButton>
         <Container className={classes.form}>
-          <Typography variant="h2" className={classes.title}>
-            Register Project
-          </Typography>
+          <h2 className={classes.title}>Project</h2>
           <TextField
             variant="outlined"
             label="Project Name"
@@ -132,21 +143,20 @@ export default function RegisterProjectDialog(props) {
             variant="outlined"
             label="Desired Pixel"
             className={classes.formItem}
+            type="number"
             value={projects.data && projects.data.pixels}
             onChange={handlePixelsChange}
           />
           {projects.loading ? (
-            <CircularProgress />
+            <CircularProgress className={classes.loading} />
           ) : (
-            <Link to="/home">
-              <Button
-                variant="contained"
-                className={classes.buttonRegister}
-                onClick={createProjectData}
-              >
-                <Typography variant="h6">Register</Typography>
-              </Button>
-            </Link>
+            <Button
+              variant="contained"
+              className={classes.buttonRegister}
+              onClick={createProjectData}
+            >
+              <Typography variant="h6">Register</Typography>
+            </Button>
           )}
         </Container>
       </Dialog>

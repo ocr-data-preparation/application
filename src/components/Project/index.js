@@ -20,9 +20,17 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center"
   },
   dialog: {
-    margin: "5vw",
+    marginLeft: "5vw",
+    marginRight: "5vw",
+    marginTop: "5vh",
+    marginBottom: "5vh",
     height: "15vw",
-    width: "15vw"
+    width: "15vw",
+    color: "white",
+    backgroundColor: "#FF5A5F",
+    border: "none",
+    fontSize: "2vw",
+    fontFamily: "inherit"
   }
 }));
 

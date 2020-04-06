@@ -1,9 +1,7 @@
 import React from "react";
-import { Box, Grid } from "@material-ui/core";
+import { Box, Grid, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
-import Publish from "@material-ui/icons/Publish";
-import GetApp from "@material-ui/icons/GetApp";
 import { Link } from "react-router-dom";
 
 import UploadDialog from "./UploadDialog";
@@ -11,14 +9,17 @@ import DownloadDialog from "./DownloadDialogNoPath";
 
 const useStyles = makeStyles(theme => ({
   container: {
-    marginTop: "10vw",
     textAlign: "center",
     direction: "column",
     justifyContent: "center",
     alignItems: "center"
   },
   header: {
-    padding: "20px"
+    padding: "20px",
+    color: "white",
+    fontSize: "5vw",
+    marginTop: "2vw",
+    marginBottom: "2vw"
   },
   miniContainer: {
     padding: "10px",
@@ -30,8 +31,24 @@ const useStyles = makeStyles(theme => ({
     padding: "20px",
     justifyContent: "center"
   },
+  buttonContainerRight: {
+    marginRight: "5vw",
+    padding: "20px",
+    justifyContent: "center"
+  },
   buttonLabel: {
     padding: "20px"
+  },
+  dialogTag: {
+    marginTop: "3vw",
+    fontSize: "3vw",
+    color: "white"
+  },
+  helpButton: {
+    color: "white",
+    marginTop: "5vw",
+    fontSize: "2vw",
+    backgroundColor: "#6E87FF"
   }
 }));
 
@@ -40,19 +57,25 @@ function Home() {
   return (
     <div>
       <Grid container className={classes.container}>
-        <h2 className={classes.header}>Choose your action</h2>
+        <h2 className={classes.header}>Choose Your Action</h2>
         <Grid container className={classes.miniContainer}>
-          <Box className={classes.buttonContainer}>
+          <Box className={classes.buttonContainerRight}>
             <UploadDialog />
-            <div>Upload</div>
+            <div className={classes.dialogTag}>Upload</div>
           </Box>
           <Box className={classes.buttonContainer}>
             <DownloadDialog />
-            <div>Download</div>
+            <div className={classes.dialogTag}>Download</div>
           </Box>
         </Grid>
         <Link to="/help">
-          <Fab variant="extended">Need help? Click here</Fab>
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.helpButton}
+          >
+            Need help? Click here
+          </Button>
         </Link>
       </Grid>
     </div>

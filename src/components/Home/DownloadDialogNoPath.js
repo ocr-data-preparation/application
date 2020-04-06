@@ -1,5 +1,4 @@
 import React from "react";
-import { URL_BASE_API } from "../../config";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
@@ -7,13 +6,12 @@ import {
   Slide,
   IconButton,
   Container,
-  CircularProgress,
-  Fab
+  CircularProgress
 } from "@material-ui/core";
 import { CloudDownload, Close, CheckCircle, GetApp } from "@material-ui/icons";
-import axios from "axios";
-import UploadedDialog from "./SuccessDialog";
 import SuccessDialog from "./SuccessDialog";
+
+import NotAvailable from "../UI/NotAvailable";
 
 const useStyles = makeStyles(theme => ({
   downloadContainer: {
@@ -47,6 +45,15 @@ const useStyles = makeStyles(theme => ({
   },
   content: {
     textAlign: "center"
+  },
+  title: {
+    color: "white",
+    backgroundColor: "#FF5A5F",
+    height: "15vw",
+    width: "15vw"
+  },
+  titleIcon: {
+    fontSize: "10vw"
   }
 }));
 
@@ -86,14 +93,18 @@ export default function DownloadDialog() {
 
   return (
     <React.Fragment>
-      <Fab onClick={handleClickOpen}>
-        <GetApp />
-      </Fab>
+      <Button
+        variant="outlined"
+        color="primary"
+        onClick={handleClickOpen}
+        className={classes.title}
+      >
+        <GetApp className={classes.titleIcon} />
+      </Button>
       {download.downloaded ? (
         <SuccessDialog message="Image saved" />
       ) : (
         <Dialog
-          fullScreen
           open={open}
           onClose={handleClose}
           TransitionComponent={Transition}
@@ -107,7 +118,8 @@ export default function DownloadDialog() {
           >
             <Close className={classes.closeIcon} />
           </IconButton>
-          {download.loading ? (
+          <NotAvailable />
+          {/* {download.loading ? (
             <CircularProgress className={classes.circularLoader} />
           ) : (
             <div class={classes.content}>
@@ -126,7 +138,7 @@ export default function DownloadDialog() {
                 Download
               </Button>
             </div>
-          )}
+          )} */}
         </Dialog>
       )}
     </React.Fragment>

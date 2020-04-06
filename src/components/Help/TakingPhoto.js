@@ -10,9 +10,6 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     backgroundColor: "#FF5A5F",
   },
-  root: {
-    marginTop: "5vw",
-  },
   listDisplay: {
     textAlign: "left",
   },
@@ -46,8 +43,8 @@ function TakingPhoto() {
   const minRes = "8MP";
 
   return (
-    <div className={classes.root}>
-      <h2>2. TAKING PHOTO</h2>
+    <div>
+      <h1>2. TAKING PHOTO</h1>
 
       <Grid className={classes.description}>
         <h3>Check Your Camera's Resolution</h3>

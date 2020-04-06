@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { IconButton, Paper, Grid } from "@material-ui/core";
+import { IconButton, Paper, Grid, Divider } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import ArrowBackRoundedIcon from "@material-ui/icons/ArrowBackRounded";
 import FillingInPaper from "./FillingInPaper";
@@ -42,15 +42,11 @@ function Help() {
       </Grid>
       <Grid container className={classes.container}>
         <Paper className={classes.display}>
-          <Grid>
-            <FillingInPaper />
-          </Grid>
-          <Grid>
-            <TakingPhoto />
-          </Grid>
-          <Grid>
-            <SubmittingTutorial />
-          </Grid>
+          <FillingInPaper />
+          <Divider />
+          <TakingPhoto />
+          <Divider />
+          <SubmittingTutorial />
         </Paper>
       </Grid>
     </div>

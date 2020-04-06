@@ -46,7 +46,7 @@ function FillingInPaper() {
   return (
     <div className={classes.root}>
       <div className={classes.section}>
-        <h2>1. FILLING THE PAPER</h2>
+        <h1>1. FILLING THE PAPER</h1>
         <Grid className={classes.description}>
           <h3>Download and Print the Template Picture</h3>
           <p>

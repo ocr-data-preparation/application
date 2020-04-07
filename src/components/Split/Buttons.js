@@ -131,7 +131,7 @@ function Buttons(props) {
     let pixel = await getPixel(cookie.get("project-id"));
     let project_id = await getProjectId(cookie.get("project-id"));
     let project_name = await getProjectName(cookie.get("project-id"));
-    let project_info = project_id + "-" + project_name;
+    let project_info = project_id + " - " + project_name;
     let sliceType = tipePotongan === "angka" ? "number" : "box";
     if (tipeWarna === "color") {
       await axios.post(`${URL_BASE_API}/image/save/color`, {

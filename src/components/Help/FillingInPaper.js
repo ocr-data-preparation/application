@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 
 import Button from "../UI/Button";
 
-import TemplateImage from "../../assets/img/paper_template.png";
+import FilledTemplateImage from "../../assets/img/paper_template.png";
+import TemplateImage from "../../assets/img/template.png";
 
 const useStyles = makeStyles((theme) => ({
   contentDispay: {
@@ -88,7 +89,11 @@ function FillingInPaper() {
       </Grid>
 
       <Grid>
-        <img src={TemplateImage} alt={""} className={classes.templateImage} />
+        <img
+          src={FilledTemplateImage}
+          alt={""}
+          className={classes.templateImage}
+        />
       </Grid>
     </div>
   );

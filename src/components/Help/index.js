@@ -7,6 +7,8 @@ import FillingInPaper from "./FillingInPaper";
 import SubmittingTutorial from "./SubmittingTutorial";
 import TakingPhoto from "./TakingPhoto";
 
+import containerBackground from "../../assets/img/flat.gif";
+
 const useStyles = makeStyles((theme) => ({
   container: {
     marginTop: "3vw",

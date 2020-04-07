@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 
 import Button from "../UI/Button";
 
@@ -56,11 +57,17 @@ function FillingInPaper() {
           </p>
         </Grid>
         <Grid>
-          <img src={TemplateImage} alt={""} className={classes.templateImage} />
-          <Button
-            buttonTag={"Download Template"}
-            style={{ marginTop: "0vw" }}
-          />
+          <Link to={TemplateImage} target="_blank" download>
+            <img
+              src={TemplateImage}
+              alt={""}
+              className={classes.templateImage}
+            />
+            <Button
+              buttonTag={"Download Template"}
+              style={{ marginTop: "0vw" }}
+            />
+          </Link>
         </Grid>
       </div>
 

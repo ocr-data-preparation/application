@@ -115,12 +115,22 @@ function Buttons(props) {
     return parseInt(res.data.pixels);
   };
 
+  const getProjectId = async (id) => {
+    let res = await axios.get(URL_BASE_API + "/project/" + id);
+    return res.data.id;
+  };
+
+  const getProjectName = async (id) => {
+    let res = await axios.get(URL_BASE_API + "/project/" + id);
+    return res.data.project_name;
+  };
+
   const handleSplit = async () => {
     setData({ ...data, loading: true });
 
     let pixel = await getPixel(cookie.get("project-id"));
-    let project_id = await getPixel(cookie.get("project-id"));
-    let project_name = await getPixel(cookie.get("project-id"));
+    let project_id = await getProjectId(cookie.get("project-id"));
+    let project_name = await getProjectName(cookie.get("project-id"));
     let project_info = project_id + "-" + project_name;
     let sliceType = tipePotongan === "angka" ? "number" : "box";
     if (tipeWarna === "color") {

@@ -13,7 +13,7 @@ import {
   Select,
   ButtonGroup,
   Button,
-  CircularProgress
+  CircularProgress,
 } from "@material-ui/core";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
@@ -26,10 +26,10 @@ import SplitDone from "../splitDone/splitDoneComp";
 
 const cookie = new Cookie();
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     textAlign: "center",
-    width: "30vw"
+    width: "30vw",
   },
   paper: {
     marginTop: "2vw",
@@ -38,20 +38,20 @@ const useStyles = makeStyles(theme => ({
     maxWidth: "fit-content",
     color: theme.palette.text.secondary,
     width: "20vw",
-    marginLeft: "4vw"
+    marginLeft: "4vw",
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 200
+    minWidth: 200,
   },
   container: {
-    placeContent: "center"
+    placeContent: "center",
   },
   imageContainer: {},
   buttonsContainer: {},
   loading: {
-    margin: "2vw"
-  }
+    margin: "2vw",
+  },
 }));
 
 function Buttons(props) {
@@ -59,12 +59,14 @@ function Buttons(props) {
   const [tipePotongan, setTipePotongan] = useState("angka");
   const [tipeWarna, setTipeWarna] = useState("color");
   const [ketebalan, setKetebalan] = useState(0);
+  const [windowSize, setWindowSize] = useState(0);
   const [noise, setNoise] = useState("none");
   const [data, setData] = useState({
     splitted: false,
     loading: false,
-    error: false
+    error: false,
   });
+  const [squaredPath, setSquaredPath] = useState(props.squared_path);
 
   var arr = props.excludes;
 
@@ -78,14 +80,14 @@ function Buttons(props) {
         backgroundColor: "yellow",
         opacity: "0.3",
         width: "30px",
-        height: "31px"
+        height: "31px",
       };
     } else {
       btnStyle = {
         backgroundColor: "transparent",
         opacity: "0.3",
         width: "30px",
-        height: "31px"
+        height: "31px",
       };
     }
 
@@ -108,7 +110,7 @@ function Buttons(props) {
     return arr[idX][idY];
   }
 
-  const getPixel = async id => {
+  const getPixel = async (id) => {
     let res = await axios.get(URL_BASE_API + "/project/" + id);
     return parseInt(res.data.pixels);
   };
@@ -117,26 +119,40 @@ function Buttons(props) {
     setData({ ...data, loading: true });
 
     let pixel = await getPixel(cookie.get("project-id"));
-    await axios.post(`${URL_BASE_API}/image/save`, {
-      path: props.path,
-      pixels: pixel,
-      includes: arr
-    });
+    let sliceType = tipePotongan === "angka" ? "number" : "box";
+    if (tipeWarna === "color") {
+      await axios.post(`${URL_BASE_API}/image/save/color`, {
+        path: props.path,
+        includes: arr,
+        pixels: pixel,
+        slice_type: sliceType,
+      });
+    } else if (tipeWarna === "bw") {
+      await axios.post(`${URL_BASE_API}/image/save/blackwhite`, {
+        path: props.path,
+        includes: arr,
+        pixels: pixel,
+        slice_type: sliceType,
+        thickness: ketebalan,
+        denoise_type: noise,
+        window_size: windowSize,
+      });
+    }
 
     setData({ ...data, loading: false, splitted: true });
   };
 
-  const handleChangeTipePotongan = event => {
+  const handleChangeTipePotongan = (event) => {
     setTipePotongan(event.target.value);
     console.log(tipePotongan);
   };
 
-  const handleNoise = event => {
+  const handleNoise = (event) => {
     setNoise(event.target.value);
     console.log(noise);
   };
 
-  const handleChangeTipeWarna = event => {
+  const handleChangeTipeWarna = (event) => {
     setTipeWarna(event.target.value);
     console.log(tipeWarna);
   };
@@ -151,17 +167,38 @@ function Buttons(props) {
     console.log(ketebalan);
   };
 
+  const handleIncrementWindowSize = () => {
+    setWindowSize(windowSize + 1);
+    console.log(windowSize);
+  };
+
+  const handleDecrementWindowSize = () => {
+    if (windowSize > 0) {
+      setWindowSize(windowSize - 1);
+    }
+    console.log(windowSize);
+  };
+
   const handleOption = async () => {
-    let pixel = await getPixel(cookie.get("project-id"));
-    await axios.post(`${URL_BASE_API}/image/save`, {
-      path: props.path,
-      pixels: pixel,
-      includes: arr,
-      varTipePotongBackend: tipePotongan,
-      varTipeWarnaBackend: tipeWarna,
-      varKetebalanBackend: ketebalan,
-      varNoiseBackend: noise
-    });
+    setData({ ...data, loading: true });
+    let sliceType = tipePotongan === "angka" ? "number" : "box";
+    if (tipeWarna === "color") {
+      let res = await axios.post(`${URL_BASE_API}/image/change/color`, {
+        path: props.path,
+        slice_type: sliceType,
+      });
+      setSquaredPath(res.data.squared_image_path);
+    } else if (tipeWarna === "bw") {
+      let res = await axios.post(`${URL_BASE_API}/image/change/blackwhite`, {
+        path: props.path,
+        slice_type: sliceType,
+        thickness: ketebalan,
+        denoise_type: noise,
+        window_size: windowSize,
+      });
+      setSquaredPath(res.data.squared_image_path);
+    }
+    setData({ ...data, loading: false });
   };
 
   return (
@@ -179,7 +216,7 @@ function Buttons(props) {
                   height: "310px",
                   backgroundSize: "420px 310px",
                   backgroundImage:
-                    'url("' + URL_BASE_API + "/" + props.squared_path + '")'
+                    'url("' + URL_BASE_API + "/" + squaredPath + '")',
                 }}
               >
                 <div>
@@ -942,6 +979,36 @@ function Buttons(props) {
                       <MenuItem value={"manual"}>Manual</MenuItem>
                     </Select>
                   </FormControl>
+                  {noise === "manual" ? (
+                    <FormControl className={classes.formControl}>
+                      <FormLabel id="window_size">Window Size</FormLabel>
+                      <ButtonGroup>
+                        <FormControlLabel
+                          control={
+                            <IconButton
+                              color="primary"
+                              onClick={handleDecrementWindowSize}
+                            >
+                              <RemoveCircleIcon />
+                            </IconButton>
+                          }
+                        />
+                        <FormControlLabel
+                          control={<Button disabled>{windowSize}</Button>}
+                        />
+                        <FormControlLabel
+                          control={
+                            <IconButton
+                              color="primary"
+                              onClick={handleIncrementWindowSize}
+                            >
+                              <AddCircleIcon />
+                            </IconButton>
+                          }
+                        />
+                      </ButtonGroup>
+                    </FormControl>
+                  ) : null}
                   <FormControl className={classes.formControl}>
                     <FormLabel id="tebal">Ketebalan</FormLabel>
                     <ButtonGroup>

@@ -119,10 +119,14 @@ function Buttons(props) {
     setData({ ...data, loading: true });
 
     let pixel = await getPixel(cookie.get("project-id"));
+    let project_id = await getPixel(cookie.get("project-id"));
+    let project_name = await getPixel(cookie.get("project-id"));
+    let project_info = project_id + "-" + project_name;
     let sliceType = tipePotongan === "angka" ? "number" : "box";
     if (tipeWarna === "color") {
       await axios.post(`${URL_BASE_API}/image/save/color`, {
         path: props.path,
+        project: project_info,
         includes: arr,
         pixels: pixel,
         slice_type: sliceType,
@@ -130,6 +134,7 @@ function Buttons(props) {
     } else if (tipeWarna === "bw") {
       await axios.post(`${URL_BASE_API}/image/save/blackwhite`, {
         path: props.path,
+        project: project_info,
         includes: arr,
         pixels: pixel,
         slice_type: sliceType,

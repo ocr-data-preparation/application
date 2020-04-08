@@ -16,7 +16,6 @@ export default function requiredToken(Component) {
       this.state = { token };
     }
     render() {
-        console.log("hei " + this.state.token );
       if (this.state.token != null) {
           
         return (

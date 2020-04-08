@@ -2,7 +2,8 @@ import React from "react";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import TakenImage from "../../assets/img/taken_image.jpg";
+import TakenImageCamera from "../../assets/img/taken_image_camera.jpg";
+import TakenImageScanner from "../../assets/img/taken_image_scanner.jpg";
 
 const useStyles = makeStyles((theme) => ({
   contentDispay: {
@@ -57,12 +58,12 @@ function TakingPhoto() {
       </Grid>
 
       <Grid>
-        <img src={TakenImage} alt={""} className={classes.image} />
+        <img src={TakenImageCamera} alt={""} className={classes.image} />
         <p>Image taken from camera</p>
       </Grid>
 
       <Grid>
-        <img src={TakenImage} alt={""} className={classes.image} />
+        <img src={TakenImageScanner} alt={""} className={classes.image} />
         <p>Image taken from scanner</p>
       </Grid>
 

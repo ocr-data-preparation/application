@@ -13,17 +13,20 @@ import TakingPhoto from "./components/Help/TakingPhoto";
 import SubmittingTutorial from "./components/Help/SubmittingTutorial";
 import SplitDone from "./components/splitDone/splitDoneComp";
 
+import requiredToken from './middleware/requiredToken';
+
+
 function App() {
   return (
     <Switch>
       <Route exact path="/" component={Project} />
-      <Route path="/home" component={Home} />
-      <Route path="/warning" component={Warning} />
+      <Route path="/home" component={requiredToken(Home)} />
+      <Route path="/warning" component={requiredToken(Warning)} />
       <Route exact path="/help" component={Help} />
       {/* <Route exact path="/split" component={Split} /> */}
-      <Route exact path="/buttons" component={Buttons} />
-      <Route exact path="/test" component={TestNewUI} />
-      <Route path="/split/done" component={SplitDone} />
+      <Route exact path="/buttons" component={requiredToken(Buttons)} />
+      <Route exact path="/test" component={requiredToken(TestNewUI)} />
+      <Route path="/split/done" component={requiredToken(SplitDone)} />
       <Route path="/help/paper" component={FillingInPaper} />
       <Route path="/help/take" component={TakingPhoto} />
       <Route path="/help/submit" component={SubmittingTutorial} />

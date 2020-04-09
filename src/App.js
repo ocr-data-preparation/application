@@ -13,8 +13,7 @@ import TakingPhoto from "./components/Help/TakingPhoto";
 import SubmittingTutorial from "./components/Help/SubmittingTutorial";
 import SplitDone from "./components/splitDone/splitDoneComp";
 
-import requiredToken from './middleware/requiredToken';
-
+import requiredToken from "./middleware/requiredToken";
 
 function App() {
   return (
@@ -22,7 +21,7 @@ function App() {
       <Route exact path="/" component={Project} />
       <Route path="/home" component={requiredToken(Home)} />
       <Route path="/warning" component={requiredToken(Warning)} />
-      <Route exact path="/help" component={Help} />
+      <Route exact path="/help" component={requiredToken(Help)} />
       {/* <Route exact path="/split" component={Split} /> */}
       <Route exact path="/buttons" component={requiredToken(Buttons)} />
       <Route exact path="/test" component={requiredToken(TestNewUI)} />

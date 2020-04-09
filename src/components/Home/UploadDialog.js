@@ -8,7 +8,7 @@ import {
   Slide,
   IconButton,
   Container,
-  CircularProgress
+  CircularProgress,
 } from "@material-ui/core";
 import { InsertPhoto, Close, Publish } from "@material-ui/icons";
 import { useDropzone } from "react-dropzone";
@@ -21,7 +21,7 @@ const thumbsContainer = {
   display: "flex",
   flexDirection: "row",
   flexWrap: "wrap",
-  marginTop: 16
+  marginTop: 16,
 };
 
 const thumb = {
@@ -33,63 +33,63 @@ const thumb = {
   width: "auto",
   height: "auto",
   padding: 4,
-  boxSizing: "border-box"
+  boxSizing: "border-box",
 };
 
 const thumbInner = {
   display: "flex",
   minWidth: 0,
-  overflow: "hidden"
+  overflow: "hidden",
 };
 
 const img = {
   display: "block",
   width: "25vw",
-  height: "auto"
+  height: "auto",
 };
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   appBar: {
-    position: "relative"
+    position: "relative",
   },
   title: {
     marginLeft: theme.spacing(2),
-    flex: 1
+    flex: 1,
   },
   uploadContainer: {
     textAlign: "center",
     width: "auto",
-    marginBottom: "2vw"
+    marginBottom: "2vw",
   },
   insertPhotoIcons: {
     marginTop: "2vw",
     marginBottom: "3vw",
-    fontSize: "20vw"
+    fontSize: "20vw",
   },
   iconButton: {
     placeSelf: "flex-end",
-    width: "3vw"
+    width: "3vw",
   },
   closeIcon: {
-    fontSize: "2vw"
+    fontSize: "2vw",
   },
   chooseImageButton: {
     width: "auto",
     placeSelf: "center",
     borderRadius: "10px",
-    padding: "1vw"
+    padding: "1vw",
   },
   title: {
     color: "white",
     backgroundColor: "#FF5A5F",
     height: "15vw",
-    width: "15vw"
+    width: "15vw",
   },
   titleIcon: {
-    fontSize: "10vw"
+    fontSize: "10vw",
   },
   loading: {
-    margin: "2vw"
-  }
+    margin: "2vw",
+  },
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -103,26 +103,26 @@ export default function UploadDialog() {
     excludes: null,
     path: null,
     squared_path: null,
-    loading: false
+    loading: false,
   });
   const [open, setOpen] = React.useState(false);
   const [files, setFiles] = useState([]);
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
-    onDrop: acceptedFiles => {
+    onDrop: (acceptedFiles) => {
       var button = (document.getElementById("bt1").style.display = "none");
       button = document.getElementById("bt2").style.display = "initial";
       document.getElementById("icon").style.display = "none";
       document.getElementById("dz2").style.display = "none";
       document.getElementById("image").style.display = "initial";
       setFiles(
-        acceptedFiles.map(file =>
+        acceptedFiles.map((file) =>
           Object.assign(file, {
-            preview: URL.createObjectURL(file)
+            preview: URL.createObjectURL(file),
           })
         )
       );
-    }
+    },
   });
   function onChange(e) {
     var button = (document.getElementById("bt1").style.display = "none");
@@ -131,7 +131,7 @@ export default function UploadDialog() {
     document.getElementById("dz2").style.display = "none";
     document.getElementById("image").style.display = "initial";
   }
-  const thumbs = files.map(file => (
+  const thumbs = files.map((file) => (
     <div style={thumb} key={file.name}>
       <div style={thumbInner}>
         <img src={file.preview} style={img} />
@@ -144,10 +144,11 @@ export default function UploadDialog() {
 
   const handleClose = () => {
     setOpen(false);
+    window.location.replace("http://localhost:3000/home");
     // document.getElementById("image").style.display = "none";
   };
 
-  const getInitialExcludesArray = async image => {
+  const getInitialExcludesArray = async (image) => {
     let formData = new FormData();
     formData.append("image", image);
 
@@ -155,7 +156,7 @@ export default function UploadDialog() {
       method: "post",
       url: `${URL_BASE_API}/image/submit`,
       data: formData,
-      headers: { "Content-Type": "multipart/form-data" }
+      headers: { "Content-Type": "multipart/form-data" },
     });
 
     return res.data;
@@ -171,7 +172,7 @@ export default function UploadDialog() {
       excludes: result.excludes,
       path: result.path,
       squared_path: result.squared_image_path,
-      loading: false
+      loading: false,
     });
   };
 

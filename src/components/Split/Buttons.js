@@ -1066,7 +1066,7 @@ function Buttons(props) {
           )}
         </div>
       ) : (
-        <SplitDone />
+        <SplitDone booleanList={arr} />
       )}
     </div>
   );

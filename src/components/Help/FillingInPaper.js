@@ -7,6 +7,7 @@ import Button from "../UI/Button";
 
 import FilledTemplateImage from "../../assets/img/paper_template.png";
 import TemplateImage from "../../assets/img/template.png";
+import TemplatePdf from "../../assets/img/template.pdf";
 
 const useStyles = makeStyles((theme) => ({
   contentDispay: {
@@ -54,11 +55,11 @@ function FillingInPaper() {
           <p>
             A template has been provided for the paper to be used as a place to
             fill in numbers such as the following image. You can download the
-            template on button below.
+            template on button below, and print it into A4 paper.
           </p>
         </Grid>
         <Grid>
-          <Link to={TemplateImage} target="_blank" download>
+          <Link to={TemplatePdf} target="_blank" download>
             <img
               src={TemplateImage}
               alt={""}

@@ -12,7 +12,7 @@ import {
   Box,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import ArrowBackRoundedIcon from "@material-ui/icons/ArrowBackRounded";
+import CloseIcon from "@material-ui/icons/Close";
 import FillingInPaper from "./FillingInPaper";
 import SubmittingTutorial from "./SubmittingTutorial";
 import TakingPhoto from "./TakingPhoto";
@@ -50,11 +50,8 @@ function a11yProps(index) {
 const useStyles = makeStyles((theme) => ({
   container: {
     marginTop: "3vw",
-    textAlign: "center",
-    direction: "column",
-    justifyContent: "center",
-    alignItems: "center",
     padding: "2vw",
+    justifyContent: "center",
   },
   title: {
     textAlign: "center",
@@ -66,9 +63,17 @@ const useStyles = makeStyles((theme) => ({
     width: "70%",
     padding: "3vw",
   },
+  content: {
+    textAlign: "center",
+    direction: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   back: {
-    fontSize: "3vw",
-    color: "white",
+    color: "black",    
+  },
+  backButton: {
+    textAlign: "right",
   },
   tabs: {
     marginLeft: "15vw",
@@ -88,49 +93,54 @@ function Help() {
 
   return (
     <div className={classes.root}>
-      <Link to="/home">
-        <IconButton aria-label="close">
-          <ArrowBackRoundedIcon className={classes.back} />
-        </IconButton>
-      </Link>
       <Grid container className={classes.title}>
         <h1>TUTORIAL</h1>
       </Grid>
       <Grid container className={classes.container}>
         <Paper className={classes.display}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            className={classes.tabs}
-            variant="outlined"
-            color="primary"
-          >
-            <Tab
-              label="1. FILLING IN PAPER"
-              {...a11yProps(0)}
-              className={classes.tab}
-            />
-            <Tab
-              label="2. TAKING PHOTO"
-              {...a11yProps(1)}
-              className={classes.tab}
-            />
-            <Tab
-              label="3. SUBMITTING PHOTO"
-              {...a11yProps(2)}
-              className={classes.tab}
-            />
-          </Tabs>
-          <Divider />
-          <TabPanel value={value} index={0}>
-            <FillingInPaper />
-          </TabPanel>
-          <TabPanel value={value} index={1}>
-            <TakingPhoto />
-          </TabPanel>
-          <TabPanel value={value} index={2}>
-            <SubmittingTutorial />
-          </TabPanel>
+          <div className={classes.backButton}>
+            <Link to="/home">
+              <IconButton aria-label="close">
+                <CloseIcon className={classes.back} />
+              </IconButton>
+              {/* <button>TEST</button> */}
+            </Link>
+          </div>
+          <div container className={classes.content}>  
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              className={classes.tabs}
+              variant="outlined"
+              color="primary"
+            >
+              <Tab
+                label="1. FILLING IN PAPER"
+                {...a11yProps(0)}
+                className={classes.tab}
+              />
+              <Tab
+                label="2. TAKING PHOTO"
+                {...a11yProps(1)}
+                className={classes.tab}
+              />
+              <Tab
+                label="3. SUBMITTING PHOTO"
+                {...a11yProps(2)}
+                className={classes.tab}
+              />
+            </Tabs>
+            <Divider />
+            <TabPanel value={value} index={0}>
+              <FillingInPaper />
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              <TakingPhoto />
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+              <SubmittingTutorial />
+            </TabPanel>
+          </div>
         </Paper>
       </Grid>
     </div>

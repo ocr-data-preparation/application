@@ -7,6 +7,7 @@ import Button from "../UI/Button";
 
 import FilledTemplateImage from "../../assets/img/paper_template.png";
 import TemplateImage from "../../assets/img/template.png";
+import TemplatePdf from "../../assets/img/template.pdf";
 
 const useStyles = makeStyles((theme) => ({
   contentDispay: {
@@ -52,12 +53,12 @@ function FillingInPaper() {
         <Grid className={classes.description}>
           <h3>Download and Print the Template File</h3>
           <p>
-            We have provided a pdf file of the template to be printed. You can
+            We have provided a pdf file of the template to be printed in A4 paper. You can
             download the template by clicking the button below.
           </p>
         </Grid>
         <Grid>
-          <Link to={TemplateImage} target="_blank" download>
+          <Link to={TemplatePdf} target="_blank" download>
             <img
               src={TemplateImage}
               alt={""}

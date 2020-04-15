@@ -1,9 +1,9 @@
 import React from "react";
-import { Box, Grid, Button } from "@material-ui/core";
+import { Box, Grid, Button, IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
 import { Link } from "react-router-dom";
-
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import UploadDialog from "./UploadDialog";
 import DownloadDialog from "./DownloadDialogNoPath";
 
@@ -29,10 +29,10 @@ const useStyles = makeStyles(theme => ({
   },
   buttonContainer: {
     padding: "20px",
-    justifyContent: "center"
+    justifyContent: "center",
+    direction: "column"
   },
   buttonContainerRight: {
-    marginRight: "5vw",
     padding: "20px",
     justifyContent: "center"
   },
@@ -49,6 +49,10 @@ const useStyles = makeStyles(theme => ({
     marginTop: "5vw",
     fontSize: "2vw",
     backgroundColor: "#6E87FF"
+  },
+  backButton: {
+    color: "white",
+    fontSize: "2vw",
   }
 }));
 
@@ -56,6 +60,11 @@ function Home() {
   const classes = useStyles();
   return (
     <div>
+      <Link to="/">
+        <IconButton>
+          <ArrowBackIcon className={classes.backButton} />
+        </IconButton>
+      </Link>
       <Grid container className={classes.container}>
         <h2 className={classes.header}>Choose Your Action</h2>
         <Grid container className={classes.miniContainer}>
@@ -63,20 +72,18 @@ function Home() {
             <UploadDialog />
             <div className={classes.dialogTag}>Upload</div>
           </Box>
-          <Box className={classes.buttonContainer}>
-            <DownloadDialog />
-            <div className={classes.dialogTag}>Download</div>
-          </Box>
         </Grid>
-        <Link to="/help">
-          <Button
-            variant="outlined"
-            color="primary"
-            className={classes.helpButton}
-          >
-            Need help? Click here
-          </Button>
-        </Link>
+        <Grid container className={classes.buttonContainer}>
+          <Link to="/help">
+            <Button
+              variant="outlined"
+              color="primary"
+              className={classes.helpButton}
+            >
+              Need help? Click here
+            </Button>
+          </Link>
+        </Grid>
       </Grid>
     </div>
   );

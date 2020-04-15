@@ -958,19 +958,19 @@ function Buttons(props) {
               <Grid item xs={3}>
                 <Paper className={classes.paper}>
                   <FormControl className={classes.formControl}>
-                    <InputLabel id="potongan">Tipe Potongan</InputLabel>
+                    <InputLabel id="potongan">Splitting Type</InputLabel>
                     <Select
                       labelId="potongan"
                       id="tipe-potongan"
                       value={tipePotongan}
                       onChange={handleChangeTipePotongan}
                     >
-                      <MenuItem value={"kotak"}>Kotak</MenuItem>
-                      <MenuItem value={"angka"}>Angka</MenuItem>
+                      <MenuItem value={"kotak"}>Box</MenuItem>
+                      <MenuItem value={"angka"}>Number</MenuItem>
                     </Select>
                   </FormControl>
                   <FormControl className={classes.formControl}>
-                    <InputLabel id="warna">Tipe Warna</InputLabel>
+                    <InputLabel id="warna">Color Type</InputLabel>
                     <Select
                       labelId="warna"
                       id="tipe-warna"
@@ -1025,7 +1025,7 @@ function Buttons(props) {
                     </FormControl>
                   ) : null}
                   <FormControl className={classes.formControl}>
-                    <FormLabel id="tebal">Ketebalan</FormLabel>
+                    <FormLabel id="tebal">Thickness</FormLabel>
                     <ButtonGroup>
                       <FormControlLabel
                         control={

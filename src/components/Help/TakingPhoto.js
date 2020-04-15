@@ -50,10 +50,10 @@ function TakingPhoto() {
       <Grid className={classes.description}>
         <h3>Check Your Camera's Resolution</h3>
         <p>
-          Make sure your camera's resolution will not make the final cropped
-          image broken. The minimum resolution of your camera is {minRes}.
-          Scanning the images are preferable. The result should be like the
-          following image.
+          Your camera's resolution must at least be {minRes} for the application
+          to produce desirable results. Of course, scannned images will produce
+          better results most of the time than a photo taken with a camera. The
+          result should be like the following image.
         </p>
       </Grid>
 
@@ -70,8 +70,9 @@ function TakingPhoto() {
       <Grid className={classes.secondDescription}>
         <h3>Check Image Orientation</h3>
         <p>
-          The image must be taken as landscape. Row containing number '0's must
-          be on the top and row containing number '9's must be on the bottom.
+          The image's orientation must be landscape and the numbers should be on
+          the correct position. The row containing number '0's must be on the
+          top and the row containing number '9's must be on the bottom.
         </p>
       </Grid>
     </div>

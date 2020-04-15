@@ -43,19 +43,24 @@ function SubmittingTutorial() {
       <Grid className={classes.description}>
         <h3>Upload</h3>
         <p>
-          Click on the "Upload" button on the home page. Choose the image you
-          want to crop, or drag and drop the image on to the page. Click
-          "Submit" Button.
+          Click the "Upload" button on the home page. Choose the image you want
+          to process, or drag and drop the image on to the page. Click the
+          "Submit" Button to proceed.
         </p>
       </Grid>
 
       <Grid className={classes.secondDescription}>
         <h3>Choosing Image Parts</h3>
         <p>
-          The image should have been cropped, yet not saved yet. How the system
-          cropped the image shoud be shown. Choose the parts you want to exclude
-          by clicking on the chosen parts Click "Submit" button when all
-          excluded parts have been chosen.
+          Now, the image should have been splitted, but not yet saved into the
+          project folder. At this point, The application should show the result
+          of the initial splitting. Choose the parts you want to exclude by
+          clicking on the buttons in the grid. Yellow means that the part is
+          chosen to be saved. You can also choose the options that you want to
+          apply to the split images. After choosing the options, click apply to
+          preview the resulting images. Click the "Submit" button when all
+          excluded parts have been chosen (not yellow anymore) and the desired
+          options have been applied.
         </p>
       </Grid>
     </div>

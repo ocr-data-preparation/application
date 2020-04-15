@@ -51,11 +51,10 @@ function FillingInPaper() {
       <div className={classes.section}>
         <h1>1. FILLING THE PAPER</h1>
         <Grid className={classes.description}>
-          <h3>Download and Print the Template Picture</h3>
+          <h3>Download and Print the Template File</h3>
           <p>
-            A template has been provided for the paper to be used as a place to
-            fill in numbers such as the following image. You can download the
-            template on button below, and print it into A4 paper.
+            We have provided a pdf file of the template to be printed in A4 paper. You can
+            download the template by clicking the button below.
           </p>
         </Grid>
         <Grid>
@@ -76,8 +75,8 @@ function FillingInPaper() {
       <Grid className={classes.secondDescription}>
         <h3 className={classes.removeTopMargin}>Fill in the Template</h3>
         <p>
-          Print the template and write down numbers from 0 to 9 in the small
-          cell just like the following image.
+          After printing the template, write down the numbers from 0 to 9 in the
+          cells just like the following image.
         </p>
 
         <h3>Fill It Accordingly</h3>

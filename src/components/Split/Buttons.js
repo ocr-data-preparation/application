@@ -890,68 +890,68 @@ function Buttons(props) {
                   ></button>
                   <button
                     id={128}
-                    onClick={changeState.bind(this, 128, arr, 9, 0)}
-                    style={styleButton(arr, 9, 0)}
+                    onClick={changeState.bind(this, 128, arr, 9, 1)}
+                    style={styleButton(arr, 9, 1)}
                   ></button>
                   <button
                     id={129}
-                    onClick={changeState.bind(this, 129, arr, 9, 0)}
-                    style={styleButton(arr, 9, 0)}
+                    onClick={changeState.bind(this, 129, arr, 9, 2)}
+                    style={styleButton(arr, 9, 2)}
                   ></button>
                   <button
                     id={130}
-                    onClick={changeState.bind(this, 130, arr, 9, 0)}
-                    style={styleButton(arr, 9, 0)}
+                    onClick={changeState.bind(this, 130, arr, 9, 3)}
+                    style={styleButton(arr, 9, 3)}
                   ></button>
                   <button
                     id={131}
-                    onClick={changeState.bind(this, 131, arr, 9, 0)}
-                    style={styleButton(arr, 9, 0)}
+                    onClick={changeState.bind(this, 131, arr, 9, 4)}
+                    style={styleButton(arr, 9, 4)}
                   ></button>
                   <button
                     id={132}
-                    onClick={changeState.bind(this, 132, arr, 9, 0)}
-                    style={styleButton(arr, 9, 0)}
+                    onClick={changeState.bind(this, 132, arr, 9, 5)}
+                    style={styleButton(arr, 9, 5)}
                   ></button>
                   <button
                     id={133}
-                    onClick={changeState.bind(this, 133, arr, 9, 0)}
-                    style={styleButton(arr, 9, 0)}
+                    onClick={changeState.bind(this, 133, arr, 9, 6)}
+                    style={styleButton(arr, 9, 6)}
                   ></button>
                   <button
                     id={134}
-                    onClick={changeState.bind(this, 134, arr, 9, 0)}
-                    style={styleButton(arr, 9, 0)}
+                    onClick={changeState.bind(this, 134, arr, 9, 7)}
+                    style={styleButton(arr, 9, 7)}
                   ></button>
                   <button
                     id={135}
-                    onClick={changeState.bind(this, 135, arr, 9, 0)}
-                    style={styleButton(arr, 9, 0)}
+                    onClick={changeState.bind(this, 135, arr, 9, 8)}
+                    style={styleButton(arr, 9, 8)}
                   ></button>
                   <button
                     id={136}
-                    onClick={changeState.bind(this, 136, arr, 9, 0)}
-                    style={styleButton(arr, 9, 0)}
+                    onClick={changeState.bind(this, 136, arr, 9, 9)}
+                    style={styleButton(arr, 9, 9)}
                   ></button>
                   <button
                     id={137}
-                    onClick={changeState.bind(this, 137, arr, 9, 0)}
-                    style={styleButton(arr, 9, 0)}
+                    onClick={changeState.bind(this, 137, arr, 9, 10)}
+                    style={styleButton(arr, 9, 10)}
                   ></button>
                   <button
                     id={138}
-                    onClick={changeState.bind(this, 138, arr, 9, 0)}
-                    style={styleButton(arr, 9, 0)}
+                    onClick={changeState.bind(this, 138, arr, 9, 11)}
+                    style={styleButton(arr, 9, 11)}
                   ></button>
                   <button
                     id={139}
-                    onClick={changeState.bind(this, 139, arr, 9, 0)}
-                    style={styleButton(arr, 9, 0)}
+                    onClick={changeState.bind(this, 139, arr, 9, 12)}
+                    style={styleButton(arr, 9, 12)}
                   ></button>
                   <button
                     id={140}
-                    onClick={changeState.bind(this, 140, arr, 9, 0)}
-                    style={styleButton(arr, 9, 0)}
+                    onClick={changeState.bind(this, 140, arr, 9, 13)}
+                    style={styleButton(arr, 9, 13)}
                   ></button>
                 </div>
               </div>

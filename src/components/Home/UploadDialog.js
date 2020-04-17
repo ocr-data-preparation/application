@@ -144,7 +144,7 @@ export default function UploadDialog() {
 
   const handleClose = () => {
     setOpen(false);
-    window.location.replace("http://localhost:3000/home");
+    window.location.href = "/home";
     // document.getElementById("image").style.display = "none";
   };
 

@@ -20,7 +20,7 @@ export default function requiredToken(Component) {
           </>
         );
       }
-      window.location.replace(`http://localhost:3000/`);
+      window.location.href = "/";
     }
   }
   return Token;

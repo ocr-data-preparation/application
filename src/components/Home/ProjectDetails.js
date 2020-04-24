@@ -15,39 +15,24 @@ const getProjectDetail = async (id) => {
   return res;
 };
 
-const getProjectName = async (id) => {
-  let res = await axios.get(URL_BASE_API + "/project/" + id);
-  return res.data.project_name;
-};
-
 export default class ProjectDetails extends React.Component {
   state = {
     id: cookie.get("project-id"),
+    name: "",
     data: []
   }
 
-
-
-  constructor() {
-    super();
-    console.log("from component");
-    // console.log(this.state.data + " state")
-  }
-
-
   async componentDidMount() {
-    console.log("cookie id " + this.state.id)
-    const response = await getProjectDetail(this.state.id +" - test")//await fetch(url,{mode: 'no-cors',method: 'post',body: JSON.stringify({"project": "3 - test"})})
+    this.setState({name: this.props.project_name});
+    const response = await getProjectDetail(this.state.id +" - "+this.props.project_name);
     this.setState({ data: response.data });
-    console.log(this.state.data)
-
   }
 
   render() {
     return (
       <div>
         <h1 style={{ marginTop: -10 }}>Project Detail: {this.state.name}</h1>
-        {this.state.data.map(detail => <DetailItem number={detail.id} amount={detail.amount} />)}
+        {this.state.data.map(detail => <DetailItem key={detail.id} number={detail.id} amount={detail.amount} />)}
       </div>
     )
   }

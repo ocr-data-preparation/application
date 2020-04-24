@@ -83,23 +83,16 @@ const getProjectName = async (id) => {
   return res.data.project_name;
 };
 
-const getFolderName = async () =>{
-  const projectid = await cookie.get("project-id");
-  const project_name = await getProjectName(projectid);
-  //console.log(projectid+ " - " + project_name);
-  return (projectid +" - "+project_name);
-}
 
 function Home() {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
- 
+  const [name, setName] = React.useState("");
 
-  let projectID = cookie.get("project-id");
-
-
+  
   const handleClickOpen = () => {
+    //console.log(name);
     setOpen(true);
   };
 
@@ -107,6 +100,7 @@ function Home() {
     setOpen(false);
   };
 
+  getProjectName(cookie.get("project-id")).then(res => setName(res))
 
   return (
     <div>
@@ -158,7 +152,7 @@ function Home() {
               </IconButton>
               <div style ={{width:500}}></div>
               <div style = {{paddingLeft:10, paddingRight:10}}>
-                <ProjectDetails project_id = {cookie.get("project-id")}/>
+                <ProjectDetails project_name = {name}/>
               </div>
               
             </Dialog>

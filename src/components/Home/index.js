@@ -140,12 +140,13 @@ function Home() {
               className={classes.helpButton}
               onClick= {handleClickOpen}
             >
-              Need help? Click here
+              See project detail
             </Button>
             <Dialog
               open={open}
               onClose={handleClose}
-              TransitionComponent={Transition}>
+              TransitionComponent={Transition}
+              >
               <IconButton
                 edge="start"
                 color="inherit"
@@ -156,9 +157,13 @@ function Home() {
                 <Close className={classes.closeIcon} />
               </IconButton>
               <div style ={{width:500}}></div>
-              <ProjectDetails project_id = {projectID}/>
+              <div style = {{paddingLeft:10, paddingRight:10}}>
+                <ProjectDetails project_id = {cookie.get("project-id")}/>
+              </div>
+              
             </Dialog>
         </Grid>
+
         
       </Grid>
     </div>

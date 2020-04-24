@@ -67,8 +67,7 @@ function Buttons(props) {
     error: false,
   });
   const [squaredPath, setSquaredPath] = useState(props.squared_path);
-
-  var arr = props.excludes;
+  const [padding, setPadding] = useState(0);
 
   var arr = props.excludes;
 
@@ -140,6 +139,7 @@ function Buttons(props) {
         includes: arr,
         pixels: pixel,
         slice_type: sliceType,
+        padding: padding,
       });
     } else if (tipeWarna === "bw") {
       await axios.post(`${URL_BASE_API}/image/save/blackwhite`, {
@@ -151,6 +151,7 @@ function Buttons(props) {
         thickness: ketebalan,
         denoise_type: noise,
         window_size: windowSize,
+        padding: padding,
       });
     }
 
@@ -194,6 +195,18 @@ function Buttons(props) {
     console.log(windowSize);
   };
 
+  const handleIncrementPadding = () => {
+    setPadding(padding + 1);
+    console.log(padding);
+  };
+
+  const handleDecrementPadding = () => {
+    if (padding > 0) {
+      setPadding(padding - 1);
+    }
+    console.log(padding);
+  };
+
   const handleOption = async () => {
     setData({ ...data, loading: true });
     let sliceType = tipePotongan === "angka" ? "number" : "box";
@@ -201,6 +214,7 @@ function Buttons(props) {
       let res = await axios.post(`${URL_BASE_API}/image/change/color`, {
         path: props.path,
         slice_type: sliceType,
+        padding: padding,
       });
       setSquaredPath(res.data.squared_image_path);
     } else if (tipeWarna === "bw") {
@@ -210,6 +224,7 @@ function Buttons(props) {
         thickness: ketebalan,
         denoise_type: noise,
         window_size: windowSize,
+        padding: padding,
       });
       setSquaredPath(res.data.squared_image_path);
     }
@@ -969,6 +984,36 @@ function Buttons(props) {
                       <MenuItem value={"angka"}>Number</MenuItem>
                     </Select>
                   </FormControl>
+                  {tipePotongan === "angka" ? (
+                    <FormControl className={classes.formControl}>
+                      <FormLabel id="padding">Padding</FormLabel>
+                      <ButtonGroup>
+                        <FormControlLabel
+                          control={
+                            <IconButton
+                              color="primary"
+                              onClick={handleDecrementPadding}
+                            >
+                              <RemoveCircleIcon />
+                            </IconButton>
+                          }
+                        />
+                        <FormControlLabel
+                          control={<Button disabled>{padding}</Button>}
+                        />
+                        <FormControlLabel
+                          control={
+                            <IconButton
+                              color="primary"
+                              onClick={handleIncrementPadding}
+                            >
+                              <AddCircleIcon />
+                            </IconButton>
+                          }
+                        />
+                      </ButtonGroup>
+                    </FormControl>
+                  ) : null}
                   <FormControl className={classes.formControl}>
                     <InputLabel id="warna">Color Type</InputLabel>
                     <Select

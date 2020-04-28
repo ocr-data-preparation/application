@@ -1,11 +1,22 @@
 import React from "react";
-import { Box, Grid, Button, IconButton } from "@material-ui/core";
+import { Box, Grid, Button, IconButton,Slide,Dialog } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
 import { Link } from "react-router-dom";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { Close } from "@material-ui/icons";
+
 import UploadDialog from "./UploadDialog";
 import DownloadDialog from "./DownloadDialogNoPath";
+import { URL_BASE_API } from "../../config";
+
+
+import axios from "axios";
+import Cookie from "universal-cookie";
+import ProjectDetails from "./ProjectDetails";
+
+const cookie = new Cookie();
+
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -53,11 +64,44 @@ const useStyles = makeStyles(theme => ({
   backButton: {
     color: "white",
     fontSize: "2vw",
+  },
+  iconButton: {
+    placeSelf: "flex-end",
+    width: "3vw"
+  },
+  closeIcon: {
+    fontSize: "2vw"
   }
 }));
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+const getProjectName = async (id) => {
+  let res = await axios.get(URL_BASE_API + "/project/" + id);
+  return res.data.project_name;
+};
+
+
 function Home() {
   const classes = useStyles();
+
+  const [open, setOpen] = React.useState(false);
+  const [name, setName] = React.useState("");
+
+  
+  const handleClickOpen = () => {
+    //console.log(name);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  getProjectName(cookie.get("project-id")).then(res => setName(res))
+
   return (
     <div>
       <Link to="/">
@@ -83,7 +127,38 @@ function Home() {
               Need help? Click here
             </Button>
           </Link>
+          <div style = {{width: 20}}></div>
+          <Button
+              variant="outlined"
+              color="primary"
+              className={classes.helpButton}
+              onClick= {handleClickOpen}
+            >
+              See project detail
+            </Button>
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              TransitionComponent={Transition}
+              >
+              <IconButton
+                edge="start"
+                color="inherit"
+                onClick={handleClose}
+                aria-label="close"
+                className={classes.iconButton}
+              >
+                <Close className={classes.closeIcon} />
+              </IconButton>
+              <div style ={{width:500}}></div>
+              <div style = {{paddingLeft:10, paddingRight:10}}>
+                <ProjectDetails project_name = {name}/>
+              </div>
+              
+            </Dialog>
         </Grid>
+
+        
       </Grid>
     </div>
   );

@@ -10,8 +10,10 @@ export default function requiredToken(Component) {
     constructor(props) {
       super(props);
       const token = cookies.get("project-id");
+      console.log(token)
       this.state = { token };
     }
+    
     render() {
       if (this.state.token != null) {
         return (

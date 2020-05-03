@@ -2,8 +2,6 @@ import React,{useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { CheckCircle } from "@material-ui/icons";
 import Buttons from "../Split/Buttons";
-import { URL_BASE_API } from "../../config";
-import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,7 +44,7 @@ function SplitDone(props) {
     );
   }
 
-  const handleBack = async () => {
+  function handleBack() {
     setData({
       ...data,
       back: true,
@@ -64,18 +62,11 @@ function SplitDone(props) {
       submit: true,
       loading: true });
   };
-
-  const handleExit = async() => {
-    let res = await axios.post(`${URL_BASE_API}/image/clean`);
-    window.location.replace("http://localhost:3000/home");
-  };
    
   return (
     <div className={classes.root}>
       {!data.back ? (
         <div>
-        {!data.submit ? (
-          <div>
           <CheckCircle className={classes.doneIcon} />
           <h1 className={classes.desc}>Image Splitted!</h1>
           {countImage}
@@ -86,12 +77,6 @@ function SplitDone(props) {
           <button onClick={handleSubmit}>
             EXIT
           </button>
-        </div>
-        ) : (
-          <div>
-            {handleExit}
-          </div>
-        )}
         </div>
       ) : (
         <Buttons>

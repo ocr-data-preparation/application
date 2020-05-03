@@ -55,13 +55,6 @@ function SplitDone(props) {
     console.log(data.path);
     console.log(data.squared_path);
   }
-
-  const handleSubmit = async () => {
-    setData({ 
-      ...data, 
-      submit: true,
-      loading: true });
-  };
    
   return (
     <div className={classes.root}>
@@ -74,16 +67,11 @@ function SplitDone(props) {
           <button onClick={handleBack}>
             BACK
           </button>
-          <button onClick={handleSubmit}>
-            EXIT
-          </button>
         </div>
       ) : (
-        <Buttons>
-          squared_path={data.squared_path}
+        <Buttons squared_path={data.squared_path}
           path={data.path}
-          excludes={data.excludes}
-        </Buttons>
+          excludes={data.excludes} />
       )}
 
     </div>

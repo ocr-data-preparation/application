@@ -1,6 +1,7 @@
-import React from "react";
+import React,{useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { CheckCircle } from "@material-ui/icons";
+import Buttons from "../Split/Buttons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,11 +20,20 @@ const useStyles = makeStyles((theme) => ({
 function SplitDone(props) {
   const classes = useStyles();
   const booleanList = props.booleanList;
+  const [data, setData] = useState({
+    submit: false,
+    back: false,
+    excludes: props.excludes,
+    path: props.path,
+    squared_path: props.squaredPath,
+    loading: false,
+  });
+
   let countImage = [];
   for (let i = 0; i < booleanList.length; i++) {
     let count = 0;
     for (let j = 0; j < booleanList[i].length; j++) {
-      console.log(booleanList[i]);
+      // console.log(booleanList[i]);
       if (booleanList[i][j] === true) {
         count++;
       }
@@ -34,11 +44,48 @@ function SplitDone(props) {
       </p>
     );
   }
+
+  function handleBack() {
+    setData({ ...data, loading: true });
+
+    setData({
+      ...data,
+      back: true
+    });
+    
+    console.log(data.excludes);
+    console.log(data.path);
+    console.log(data.squared_path);
+  }
+   
   return (
     <div className={classes.root}>
-      {/* <CheckCircle className={classes.doneIcon} /> */}
+      {/* <CheckCircle className={classes.doneIcon} />
       <h1 className={classes.desc}>Image Splitted!</h1>
       {countImage}
+
+      <button onClick={handleBack}>
+        Test
+      </button> */}
+
+      {!data.back ? (
+        <div>
+          <CheckCircle className={classes.doneIcon} />
+          <h1 className={classes.desc}>Image Splitted!</h1>
+          {countImage}
+    
+          <button onClick={handleBack}>
+            Test
+          </button>
+        </div>
+      ) : (
+        <Buttons>
+          squared_path={data.squared_path}
+          path={data.path}
+          excludes={data.excludes}
+        </Buttons>
+      )}
+
     </div>
   );
 }

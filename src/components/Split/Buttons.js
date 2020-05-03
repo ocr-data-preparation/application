@@ -102,7 +102,7 @@ function Buttons(props) {
       document.getElementById(id).style.backgroundColor = "transparent";
     }
 
-    console.log(arr[idX][idY]);
+    // console.log(arr[idX][idY]);
   }
 
   function getState(arr, idX, idY) {
@@ -160,51 +160,51 @@ function Buttons(props) {
 
   const handleChangeTipePotongan = (event) => {
     setTipePotongan(event.target.value);
-    console.log(tipePotongan);
+    // console.log(tipePotongan);
   };
 
   const handleNoise = (event) => {
     setNoise(event.target.value);
-    console.log(noise);
+    // console.log(noise);
   };
 
   const handleChangeTipeWarna = (event) => {
     setTipeWarna(event.target.value);
-    console.log(tipeWarna);
+    // console.log(tipeWarna);
   };
 
   const handleIncrementTebal = () => {
     setKetebalan(ketebalan + 1);
-    console.log(ketebalan);
+    // console.log(ketebalan);
   };
 
   const handleDecrementTebal = () => {
     setKetebalan(ketebalan - 1);
-    console.log(ketebalan);
+    // console.log(ketebalan);
   };
 
   const handleIncrementWindowSize = () => {
     setWindowSize(windowSize + 1);
-    console.log(windowSize);
+    // console.log(windowSize);
   };
 
   const handleDecrementWindowSize = () => {
     if (windowSize > 0) {
       setWindowSize(windowSize - 1);
     }
-    console.log(windowSize);
+    // console.log(windowSize);
   };
 
   const handleIncrementPadding = () => {
     setPadding(padding + 1);
-    console.log(padding);
+    // console.log(padding);
   };
 
   const handleDecrementPadding = () => {
     if (padding > 0) {
       setPadding(padding - 1);
     }
-    console.log(padding);
+    // console.log(padding);
   };
 
   const handleOption = async () => {
@@ -1111,7 +1111,7 @@ function Buttons(props) {
           )}
         </div>
       ) : (
-        <SplitDone booleanList={arr} />
+        <SplitDone booleanList={arr} path={props.path} squaredPath={props.squared_path} excludes={props.excludes}/>
       )}
     </div>
   );

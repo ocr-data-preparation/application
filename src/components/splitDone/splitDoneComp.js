@@ -2,6 +2,8 @@ import React,{useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { CheckCircle } from "@material-ui/icons";
 import Buttons from "../Split/Buttons";
+import { URL_BASE_API } from "../../config";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,7 +28,6 @@ function SplitDone(props) {
     excludes: props.excludes,
     path: props.path,
     squared_path: props.squaredPath,
-    loading: false,
   });
 
   let countImage = [];
@@ -45,38 +46,52 @@ function SplitDone(props) {
     );
   }
 
-  function handleBack() {
-    setData({ ...data, loading: true });
-
+  const handleBack = async () => {
     setData({
       ...data,
-      back: true
+      back: true,
+      loading: true
     });
-    
+
     console.log(data.excludes);
     console.log(data.path);
     console.log(data.squared_path);
   }
+
+  const handleSubmit = async () => {
+    setData({ 
+      ...data, 
+      submit: true,
+      loading: true });
+  };
+
+  const handleExit = async() => {
+    let res = await axios.post(`${URL_BASE_API}/image/clean`);
+    window.location.replace("http://localhost:3000/home");
+  };
    
   return (
     <div className={classes.root}>
-      {/* <CheckCircle className={classes.doneIcon} />
-      <h1 className={classes.desc}>Image Splitted!</h1>
-      {countImage}
-
-      <button onClick={handleBack}>
-        Test
-      </button> */}
-
       {!data.back ? (
         <div>
+        {!data.submit ? (
+          <div>
           <CheckCircle className={classes.doneIcon} />
           <h1 className={classes.desc}>Image Splitted!</h1>
           {countImage}
     
           <button onClick={handleBack}>
-            Test
+            BACK
           </button>
+          <button onClick={handleSubmit}>
+            EXIT
+          </button>
+        </div>
+        ) : (
+          <div>
+            {handleExit}
+          </div>
+        )}
         </div>
       ) : (
         <Buttons>

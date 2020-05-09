@@ -1,6 +1,15 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# About
 
-## Available Scripts
+Web-based application built with React.js to be used as a platform to generate Optical Character Recognition (OCR) datasets.
+
+# Development Environment Setup
+
+## Installations
+
+- Install Node Package Manager (npm).
+- Install dependencies: `npm install`.
+
+# Available Scripts
 
 In the project directory, you can run:
 

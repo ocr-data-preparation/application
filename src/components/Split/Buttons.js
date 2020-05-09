@@ -66,12 +66,15 @@ function Buttons(props) {
     loading: false,
     error: false,
   });
+
   const [squaredPath, setSquaredPath] = useState(props.squared_path);
   const [padding, setPadding] = useState(0);
 
   var arr = props.excludes;
 
   var btnStyle;
+
+  const originalSquaredPath = props.squared_path;
 
   function styleButton(arr, idX, idY) {
     if (getState(arr, idX, idY)) {
@@ -236,6 +239,13 @@ function Buttons(props) {
       ...data,
       splitted: false,
     });
+    setSquaredPath(originalSquaredPath);
+    setTipePotongan("angka");
+    setTipeWarna("color");
+    setKetebalan(0);
+    setWindowSize(0);
+    setNoise("none");
+    setPadding(0);
   }
 
   return (

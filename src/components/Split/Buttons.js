@@ -66,12 +66,15 @@ function Buttons(props) {
     loading: false,
     error: false,
   });
+
   const [squaredPath, setSquaredPath] = useState(props.squared_path);
   const [padding, setPadding] = useState(0);
 
   var arr = props.excludes;
 
   var btnStyle;
+
+  const originalSquaredPath = props.squared_path;
 
   function styleButton(arr, idX, idY) {
     if (getState(arr, idX, idY)) {
@@ -230,6 +233,20 @@ function Buttons(props) {
     }
     setData({ ...data, loading: false });
   };
+
+  function handleBack() {
+    setData({
+      ...data,
+      splitted: false,
+    });
+    setSquaredPath(originalSquaredPath);
+    setTipePotongan("angka");
+    setTipeWarna("color");
+    setKetebalan(0);
+    setWindowSize(0);
+    setNoise("none");
+    setPadding(0);
+  }
 
   return (
     <div className={classes.root}>
@@ -1111,7 +1128,20 @@ function Buttons(props) {
           )}
         </div>
       ) : (
-        <SplitDone booleanList={arr} path={props.path} squaredPath={props.squared_path} excludes={props.excludes}/>
+        <div>
+          <SplitDone
+            booleanList={arr}
+            path={props.path}
+            squaredPath={props.squared_path}
+            excludes={props.excludes}
+          />
+
+          <ModifiedButton
+            buttonTag={"BACK"}
+            style={{ marginTop: "1vw", marginBottom: "1vw" }}
+            OnClick={handleBack}
+          />
+        </div>
       )}
     </div>
   );

@@ -5,22 +5,22 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import Button from "./Button";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     display: "block",
     textAlign: "center",
-    padding: "3vw"
+    padding: "3vw",
   },
   warning: {
-    fontSize: "20vw"
-  }
+    fontSize: "20vw",
+  },
 }));
 
 function Home() {
   const classes = useStyles();
 
   const redirectToHome = () => {
-    window.location.replace("http://localhost:3000/home");
+    window.location.href = "/home";
   };
 
   return (

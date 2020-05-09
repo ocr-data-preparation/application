@@ -10,44 +10,44 @@ import {
   Container,
   TextField,
   Typography,
-  CircularProgress
+  CircularProgress,
 } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
 
 import { URL_BASE_API } from "../../config";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    textAlign: "center"
+    textAlign: "center",
   },
   formItem: {
     marginTop: "2vw",
-    width: "30vw"
+    width: "30vw",
   },
   iconButton: {
     placeSelf: "flex-end",
-    width: "3vw"
+    width: "3vw",
   },
   closeIcon: {
-    fontSize: "2vw"
+    fontSize: "2vw",
   },
   form: {
     placeItems: "center",
-    display: "inline-grid"
+    display: "inline-grid",
   },
   title: {
-    fontSize: "3vw"
+    fontSize: "3vw",
   },
   buttonRegister: {
     marginTop: "5vw",
     placeSelf: "center",
     marginBottom: "5vh",
     color: "white",
-    backgroundColor: "#FF5A5F"
+    backgroundColor: "#FF5A5F",
   },
   loading: {
-    margin: "2vw"
-  }
+    margin: "2vw",
+  },
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -71,14 +71,14 @@ export default function RegisterProjectDialog(props) {
   const [projects, setProjects] = useState({
     data: {},
     loading: false,
-    error: false
+    error: false,
   });
 
-  const postProjectsData = async project =>
+  const postProjectsData = async (project) =>
     await axios({
       method: "POST",
       url: `${URL_BASE_API}/project/`,
-      data: { project_name: project.project_name, pixels: project.pixels }
+      data: { project_name: project.project_name, pixels: project.pixels },
     });
 
   const createProjectData = async () => {
@@ -86,22 +86,22 @@ export default function RegisterProjectDialog(props) {
       setProjects({ ...projects, loading: true });
       const res = await postProjectsData(projects.data);
 
-      setTimeout(function() {
+      setTimeout(function () {
         setProjects({ ...projects, loading: false });
         cookie.set("project-id", res.data.id);
-        window.location.replace(`http://localhost:3000/home`);
+        window.location.href = "/home";
       }, 3000);
     } catch (e) {
       setProjects({ ...projects, error: true });
     }
   };
 
-  const handleProjectNameChange = e => {
+  const handleProjectNameChange = (e) => {
     projects.data.project_name = e.target.value;
     setProjects(projects);
   };
 
-  const handlePixelsChange = e => {
+  const handlePixelsChange = (e) => {
     projects.data.pixels = parseInt(e.target.value);
     setProjects(projects);
   };

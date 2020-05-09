@@ -6,55 +6,55 @@ import {
   Slide,
   IconButton,
   Container,
-  CircularProgress
+  CircularProgress,
 } from "@material-ui/core";
 import { CloudDownload, Close, CheckCircle, GetApp } from "@material-ui/icons";
 import SuccessDialog from "./SuccessDialog";
 
-import NotAvailable from "../UI/NotAvailable";
+import Download from "./Download";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   downloadContainer: {
     marginTop: "10vw",
     textAlign: "center",
     width: "75vw",
-    marginBottom: "2vw"
+    marginBottom: "2vw",
   },
   downloadPhotoIcons: {
-    fontSize: "10vw"
+    fontSize: "10vw",
   },
   iconButton: {
     placeSelf: "flex-end",
-    width: "3vw"
+    width: "3vw",
   },
   closeIcon: {
-    fontSize: "2vw"
+    fontSize: "2vw",
   },
   downloadButton: {
     width: "15vw",
     placeSelf: "center",
     textAlign: "center",
     borderRadius: "10px",
-    padding: "1vw"
+    padding: "1vw",
   },
   circularLoader: {
-    placeSelf: "center"
+    placeSelf: "center",
   },
   hidden: {
-    display: "none"
+    display: "none",
   },
   content: {
-    textAlign: "center"
+    textAlign: "center",
   },
   title: {
     color: "white",
     backgroundColor: "#FF5A5F",
     height: "15vw",
-    width: "15vw"
+    width: "15vw",
   },
   titleIcon: {
-    fontSize: "10vw"
-  }
+    fontSize: "10vw",
+  },
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -67,7 +67,7 @@ export default function DownloadDialog() {
   const [download, setDownload] = React.useState({
     downloaded: false,
     loading: false,
-    error: false
+    error: false,
   });
 
   const handleClickOpen = () => {
@@ -118,27 +118,7 @@ export default function DownloadDialog() {
           >
             <Close className={classes.closeIcon} />
           </IconButton>
-          <NotAvailable />
-          {/* {download.loading ? (
-            <CircularProgress className={classes.circularLoader} />
-          ) : (
-            <div class={classes.content}>
-              <Container className={classes.downloadContainer}>
-                {download.downloaded ? (
-                  <CheckCircle className={classes.downloadPhotoIcons} />
-                ) : (
-                  <CloudDownload className={classes.downloadPhotoIcons} />
-                )}
-              </Container>
-              <Button
-                className={classes.downloadButton}
-                variant="contained"
-                onClick={handleDownload}
-              >
-                Download
-              </Button>
-            </div>
-          )} */}
+          <Download />
         </Dialog>
       )}
     </React.Fragment>

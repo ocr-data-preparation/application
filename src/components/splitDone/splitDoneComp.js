@@ -1,7 +1,10 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+
+import Card from "../UI/Card";
 import { CheckCircle } from "@material-ui/icons";
 import Buttons from "../Split/Buttons";
+import Button from "../UI/Button";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,11 +18,22 @@ const useStyles = makeStyles((theme) => ({
   desc: {
     margin: "2vw",
   },
+  rowCardContainer: {
+    display: "flex",
+    placeContent: "center",
+  },
+  cardContainer: {
+    display: "block",
+  },
+  card: {
+    margin: "1vw",
+  },
 }));
 
 function SplitDone(props) {
   const classes = useStyles();
   const booleanList = props.booleanList;
+  const cardContainer = [];
   const [data, setData] = useState({
     submit: false,
     back: false,
@@ -29,6 +43,7 @@ function SplitDone(props) {
   });
 
   let countImage = [];
+
   for (let i = 0; i < booleanList.length; i++) {
     let count = 0;
     for (let j = 0; j < booleanList[i].length; j++) {
@@ -38,42 +53,36 @@ function SplitDone(props) {
       }
     }
     countImage.push(
-      <p>
-        Number {i}: {count} image(s)
-      </p>
+      <div className={classes.card}>
+        <Card title={i} content={count} />
+      </div>
     );
+
+    if (i % 3 === 2 || i === booleanList.length - 1) {
+      cardContainer.push(
+        <div className={classes.rowCardContainer}>{countImage}</div>
+      );
+      countImage = [];
+    }
   }
 
-  function handleBack() {
-    setData({
-      ...data,
-      back: true,
-      loading: true
-    });
-
-    console.log(data.excludes);
-    console.log(data.path);
-    console.log(data.squared_path);
-  }
-   
   return (
     <div className={classes.root}>
+      <h1 className={classes.desc}>Image Splitted!</h1>
+      <div className={classes.cardContainer}>{cardContainer}</div>
       {!data.back ? (
         <div>
           <CheckCircle className={classes.doneIcon} />
           <h1 className={classes.desc}>Image Splitted!</h1>
           {countImage}
-    
-          <button onClick={handleBack}>
-            BACK
-          </button>
         </div>
       ) : (
-        <Buttons squared_path={data.squared_path}
+        <Buttons
+          squared_path={data.squared_path}
           path={data.path}
-          excludes={data.excludes} />
+          excludes={data.excludes}
+        />
       )}
-
     </div>
   );
 }

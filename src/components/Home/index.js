@@ -1,15 +1,20 @@
 import React from "react";
-import { Box, Grid, Button, IconButton,Slide,Dialog } from "@material-ui/core";
+import {
+  Box,
+  Grid,
+  Button,
+  IconButton,
+  Slide,
+  Dialog,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Fab from "@material-ui/core/Fab";
 import { Link } from "react-router-dom";
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { Close } from "@material-ui/icons";
 
 import UploadDialog from "./UploadDialog";
 import DownloadDialog from "./DownloadDialogNoPath";
 import { URL_BASE_API } from "../../config";
-
 
 import axios from "axios";
 import Cookie from "universal-cookie";
@@ -17,49 +22,49 @@ import ProjectDetails from "./ProjectDetails";
 
 const cookie = new Cookie();
 
-
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     textAlign: "center",
     direction: "column",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   header: {
     padding: "20px",
     color: "white",
     fontSize: "5vw",
     marginTop: "2vw",
-    marginBottom: "2vw"
+    marginBottom: "2vw",
   },
   miniContainer: {
     padding: "10px",
     direction: "row",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   buttonContainer: {
     padding: "20px",
     justifyContent: "center",
-    direction: "column"
+    direction: "column",
   },
   buttonContainerRight: {
+    marginRight: "5vw",
     padding: "20px",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   buttonLabel: {
-    padding: "20px"
+    padding: "20px",
   },
   dialogTag: {
     marginTop: "3vw",
     fontSize: "3vw",
-    color: "white"
+    color: "white",
   },
   helpButton: {
     color: "white",
-    marginTop: "5vw",
+    marginTop: "3vw",
     fontSize: "2vw",
-    backgroundColor: "#6E87FF"
+    backgroundColor: "#6E87FF",
   },
   backButton: {
     color: "white",
@@ -67,11 +72,11 @@ const useStyles = makeStyles(theme => ({
   },
   iconButton: {
     placeSelf: "flex-end",
-    width: "3vw"
+    width: "3vw",
   },
   closeIcon: {
-    fontSize: "2vw"
-  }
+    fontSize: "2vw",
+  },
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -83,14 +88,12 @@ const getProjectName = async (id) => {
   return res.data.project_name;
 };
 
-
 function Home() {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
   const [name, setName] = React.useState("");
 
-  
   const handleClickOpen = () => {
     //console.log(name);
     setOpen(true);
@@ -100,7 +103,7 @@ function Home() {
     setOpen(false);
   };
 
-  getProjectName(cookie.get("project-id")).then(res => setName(res))
+  getProjectName(cookie.get("project-id")).then((res) => setName(res));
 
   return (
     <div>
@@ -116,6 +119,10 @@ function Home() {
             <UploadDialog />
             <div className={classes.dialogTag}>Upload</div>
           </Box>
+          <Box className={classes.buttonContainer}>
+            <DownloadDialog />
+            <div className={classes.dialogTag}>Download</div>
+          </Box>
         </Grid>
         <Grid container className={classes.buttonContainer}>
           <Link to="/help">
@@ -127,38 +134,35 @@ function Home() {
               Need help? Click here
             </Button>
           </Link>
-          <div style = {{width: 20}}></div>
+          <div style={{ width: 20 }}></div>
           <Button
-              variant="outlined"
-              color="primary"
-              className={classes.helpButton}
-              onClick= {handleClickOpen}
+            variant="outlined"
+            color="primary"
+            className={classes.helpButton}
+            onClick={handleClickOpen}
+          >
+            See project detail
+          </Button>
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            TransitionComponent={Transition}
+          >
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={handleClose}
+              aria-label="close"
+              className={classes.iconButton}
             >
-              See project detail
-            </Button>
-            <Dialog
-              open={open}
-              onClose={handleClose}
-              TransitionComponent={Transition}
-              >
-              <IconButton
-                edge="start"
-                color="inherit"
-                onClick={handleClose}
-                aria-label="close"
-                className={classes.iconButton}
-              >
-                <Close className={classes.closeIcon} />
-              </IconButton>
-              <div style ={{width:500}}></div>
-              <div style = {{paddingLeft:10, paddingRight:10}}>
-                <ProjectDetails project_name = {name}/>
-              </div>
-              
-            </Dialog>
+              <Close className={classes.closeIcon} />
+            </IconButton>
+            <div style={{ width: 500 }}></div>
+            <div style={{ paddingLeft: 10, paddingRight: 10 }}>
+              <ProjectDetails project_name={name} />
+            </div>
+          </Dialog>
         </Grid>
-
-        
       </Grid>
     </div>
   );

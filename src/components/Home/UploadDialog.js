@@ -145,7 +145,7 @@ export default function UploadDialog() {
   const handleClose = () => {
     axios.post(`${URL_BASE_API}/image/clean`);
     setOpen(false);
-    window.location.replace("http://localhost:3000/home");
+    window.location.href = "/home";
     // document.getElementById("image").style.display = "none";
   };
 

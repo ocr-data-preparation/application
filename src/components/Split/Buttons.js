@@ -231,6 +231,13 @@ function Buttons(props) {
     setData({ ...data, loading: false });
   };
 
+  function handleBack() {
+    setData({
+      ...data,
+      splitted: false,
+    });
+  }
+
   return (
     <div className={classes.root}>
       {!data.splitted ? (
@@ -1111,7 +1118,20 @@ function Buttons(props) {
           )}
         </div>
       ) : (
-        <SplitDone booleanList={arr} path={props.path} squaredPath={props.squared_path} excludes={props.excludes}/>
+        <div>
+          <SplitDone
+            booleanList={arr}
+            path={props.path}
+            squaredPath={props.squared_path}
+            excludes={props.excludes}
+          />
+
+          <ModifiedButton
+            buttonTag={"BACK"}
+            style={{ marginTop: "1vw", marginBottom: "1vw" }}
+            OnClick={handleBack}
+          />
+        </div>
       )}
     </div>
   );

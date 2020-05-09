@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "../UI/Card";
 import { CheckCircle } from "@material-ui/icons";
 import Buttons from "../Split/Buttons";
+import Button from "../UI/Button";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,18 +66,6 @@ function SplitDone(props) {
     }
   }
 
-  function handleBack() {
-    setData({
-      ...data,
-      back: true,
-      loading: true,
-    });
-
-    console.log(data.excludes);
-    console.log(data.path);
-    console.log(data.squared_path);
-  }
-
   return (
     <div className={classes.root}>
       <h1 className={classes.desc}>Image Splitted!</h1>
@@ -86,8 +75,6 @@ function SplitDone(props) {
           <CheckCircle className={classes.doneIcon} />
           <h1 className={classes.desc}>Image Splitted!</h1>
           {countImage}
-
-          <button onClick={handleBack}>BACK</button>
         </div>
       ) : (
         <Buttons
